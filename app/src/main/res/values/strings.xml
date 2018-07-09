@@ -134,4 +134,7 @@
     <!--Calendar page text-->
     <string name="calendarBtnText">Make Notes</string>
 
+    <!--Notes page text-->
+    <string name="saveNotesBtnText">Save Notes</string>
+
 </resources>

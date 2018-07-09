@@ -20,9 +20,9 @@ class MyCalendar : AppCompatActivity() {
     private lateinit var mCalendarView:CalendarView
     private lateinit var makeNotesBtn:Button
 
-    var myDate:Int?=null
-    var myMonth:Int?=null
-    var myYear:Int?=null
+    var myDate:String=""
+    var myMonth:String=""
+    var myYear:String=""
     var isDateChanged=false
 
     var tempDate:String?=null
@@ -42,13 +42,12 @@ class MyCalendar : AppCompatActivity() {
             //Months are indexed from 0. So, 0 means january, 1 means February, 2 means march etc.
             val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
 
-            myDate=dayOfMonth
-            myMonth=month
-            myYear=year
+            myDate=dayOfMonth.toString()
+            var someMonth=month+1
+            myMonth=someMonth.toString()
+            myYear=year.toString()
 
             isDateChanged=true
-
-            Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
         }
 
 
