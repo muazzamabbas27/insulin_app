@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "978755147177",
+    "firebase_url": "https://insulinapp-c18b7.firebaseio.com",
+    "project_id": "insulinapp-c18b7",
+    "storage_bucket": "insulinapp-c18b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978755147177:android:002ea128b7989a64",
+        "android_client_info": {
+          "package_name": "com.ciklum.insulinapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978755147177-1kc8mja8tilvgjctvrhba0iaapkkstct.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ciklum.insulinapp",
+            "certificate_hash": "57a7a454cd1215b2d94467f581a10adb5389141d"
+          }
+        },
+        {
+          "client_id": "978755147177-7lo0n7e5o326nt1b9rjsh6gsm16f516k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-9LGYFisRi0qgveykzlCkXSB3ShyS2HE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978755147177-7lo0n7e5o326nt1b9rjsh6gsm16f516k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
