@@ -16,10 +16,14 @@ import android.net.NetworkInfo
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.support.v4.content.ContextCompat.getSystemService
 import android.net.ConnectivityManager
+import android.view.View
 
 
+class LoginActivity : AppCompatActivity(), View.OnClickListener{
+    override fun onClick(p0: View?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 
-class LoginActivity : AppCompatActivity() {
+    }
 
     lateinit var emailIDEditText: EditText
     lateinit var passwordEditText: EditText

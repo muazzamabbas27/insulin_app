@@ -72,6 +72,7 @@ class MyCalendar : AppCompatActivity() {
                 i.putExtra("month",tempMonth)
                 i.putExtra("year",tempYear)
                 startActivity(i)
+                finish()
             }
 
             else
@@ -81,6 +82,7 @@ class MyCalendar : AppCompatActivity() {
                 i.putExtra("month",myMonth)
                 i.putExtra("year",myYear)
                 startActivity(i)
+                finish()
             }
         }
 

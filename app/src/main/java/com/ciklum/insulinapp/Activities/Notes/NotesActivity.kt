@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.ciklum.insulinapp.Activities.Calendar.MyCalendar
 import com.ciklum.insulinapp.Activities.Dashboard.DashboardActivity
 import com.ciklum.insulinapp.Activities.SplashScreen.currentUser
 import com.ciklum.insulinapp.Activities.SplashScreen.mDatabaseReference
@@ -99,9 +100,9 @@ class NotesActivity : AppCompatActivity() {
             saveNotes=notesEditText.text.toString().trim()
             var anotherNote:Notes=Notes(currentUserEmailID,saveNotes,notesDate)
 
-            mFirebaseDatabaseReference= mFirebaseDatabaseReference?.child(mFirebaseUser?.uid)
-            mFirebaseDatabaseReference.setValue(anotherNote)
-            val i: Intent =Intent(this,DashboardActivity::class.java)
+            //mFirebaseDatabaseReference= mFirebaseDatabaseReference?.child(mFirebaseUser?.uid)
+            mFirebaseDatabaseReference.push().setValue(anotherNote)
+            val i: Intent =Intent(this,MyCalendar::class.java)
             startActivity(i)
             finish()
         }

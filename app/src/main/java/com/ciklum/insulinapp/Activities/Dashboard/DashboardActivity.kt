@@ -15,21 +15,30 @@ import android.view.MenuInflater
 import android.graphics.drawable.ColorDrawable
 import android.widget.Button
 import com.ciklum.insulinapp.Activities.Calendar.MyCalendar
+import com.ciklum.insulinapp.Activities.LogBG.LogBGActivity
 
 
 class DashboardActivity : AppCompatActivity() {
 
     private var calendarBtn: Button?=null
+    private var logBGLevelBtn:Button?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
         calendarBtn=findViewById(R.id.calendarBtn)
+        logBGLevelBtn=findViewById(R.id.logBGLevelBtn)
 
         calendarBtn?.setOnClickListener()
         {
             val i:Intent=Intent(this, MyCalendar::class.java)
+            startActivity(i)
+        }
+
+        logBGLevelBtn?.setOnClickListener()
+        {
+            val i:Intent=Intent(this,LogBGActivity::class.java)
             startActivity(i)
         }
 

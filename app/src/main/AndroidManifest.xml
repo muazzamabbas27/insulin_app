@@ -26,7 +26,8 @@
         <activity android:name=".Activities.Login.LoginActivity" />
         <activity android:name=".Activities.Dashboard.DashboardActivity" />
         <activity android:name=".Activities.Calendar.MyCalendar" />
-        <activity android:name=".Activities.Notes.NotesActivity"></activity>
+        <activity android:name=".Activities.Notes.NotesActivity" />
+        <activity android:name=".Activities.LogBG.LogBGActivity"></activity>
     </application>
 
 </manifest>

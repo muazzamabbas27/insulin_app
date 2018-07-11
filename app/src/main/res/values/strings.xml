@@ -137,4 +137,13 @@
     <!--Notes page text-->
     <string name="saveNotesBtnText">Save Notes</string>
 
+
+    <!--Log BG Level page text-->
+    <string name="LogBGTitle">Log Blood Glucose</string>
+    <string name="EnterBGLevelText">"*Enter current Blood Glucose level (mg/dl):</string>
+    <string name="foodIntakeText">*Select recent food intake:</string>
+    <string name="recentEventText">*Select recent event:</string>
+    <string name="checkInsulinBtnText">Check recommended level of Insulin</string>
+    <string name="doneBGBtnText">Done</string>
+
 </resources>
