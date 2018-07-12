@@ -15,6 +15,7 @@ import android.view.MenuInflater
 import android.graphics.drawable.ColorDrawable
 import android.widget.Button
 import com.ciklum.insulinapp.Activities.Calendar.MyCalendar
+import com.ciklum.insulinapp.Activities.HealthArticles.HealthArticlesActivity
 import com.ciklum.insulinapp.Activities.LogBG.LogBGActivity
 
 
@@ -22,6 +23,8 @@ class DashboardActivity : AppCompatActivity() {
 
     private var calendarBtn: Button?=null
     private var logBGLevelBtn:Button?=null
+    private var healthArticlesBtn:Button?=null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,7 @@ class DashboardActivity : AppCompatActivity() {
 
         calendarBtn=findViewById(R.id.calendarBtn)
         logBGLevelBtn=findViewById(R.id.logBGLevelBtn)
+        healthArticlesBtn=findViewById(R.id.healthArticlesBtn)
 
         calendarBtn?.setOnClickListener()
         {
@@ -39,6 +43,12 @@ class DashboardActivity : AppCompatActivity() {
         logBGLevelBtn?.setOnClickListener()
         {
             val i:Intent=Intent(this,LogBGActivity::class.java)
+            startActivity(i)
+        }
+
+        healthArticlesBtn?.setOnClickListener()
+        {
+            val i:Intent=Intent(this,HealthArticlesActivity::class.java)
             startActivity(i)
         }
 

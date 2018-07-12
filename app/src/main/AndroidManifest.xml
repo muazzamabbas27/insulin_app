@@ -3,6 +3,7 @@
     package="com.ciklum.insulinapp">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -27,8 +28,12 @@
         <activity android:name=".Activities.Dashboard.DashboardActivity" />
         <activity android:name=".Activities.Calendar.MyCalendar" />
         <activity android:name=".Activities.Notes.NotesActivity" />
-        <activity android:name=".Activities.LogBG.LogBGActivity"
-            android:windowSoftInputMode="stateHidden" /> <!-- Hide software keyboard, cursor will still be visible -->>
+        <activity
+            android:name=".Activities.LogBG.LogBGActivity"
+            android:windowSoftInputMode="stateHidden" /> <!-- Hide software keyboard, cursor will still be visible -->
+        >
+        <activity android:name=".Activities.HealthArticles.HealthArticlesActivity" />
+        <activity android:name=".Activities.Doctors.DoctorActivity"></activity>
     </application>
 
 </manifest>
