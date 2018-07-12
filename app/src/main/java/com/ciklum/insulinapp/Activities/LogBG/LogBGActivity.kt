@@ -14,6 +14,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.text.SimpleDateFormat
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.ValueEventListener
+
+
 
 
 class LogBGActivity : AppCompatActivity() {
@@ -35,6 +41,10 @@ class LogBGActivity : AppCompatActivity() {
     private var mAuth:FirebaseAuth?=null
     private lateinit var mFirebaseDatabase:FirebaseDatabase
     private lateinit var mFirebaseDatabaseReference:DatabaseReference
+
+    var keyList: ArrayList<String> = ArrayList(1000)
+    private var foundKey:String=""
+    private var isKeyFound:Boolean=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,22 +99,27 @@ class LogBGActivity : AppCompatActivity() {
             }
         }
 
+
+        val c = java.util.Calendar.getInstance().time
+        println("Current time => $c")
+
+        val df = SimpleDateFormat("dd-MMM-yyyy")
+        val currentTime = df.format(c)
+
+        insulinLevel="Test"
         checkInsulinBtn=findViewById(R.id.checkInsulinBtn)
+        calendarTime=currentTime.toString()
 
         checkInsulinBtn?.setOnClickListener()
         {
             var isDataValidCheck:Boolean=validateData()
             if(isDataValidCheck==true)
             {
-                val currentTime = java.util.Calendar.getInstance().time;
-                //Toast.makeText(applicationContext,currentTime.toString(),Toast.LENGTH_SHORT).show()
-                insulinLevel="Test"
+                checkDataNew()
 
-                calendarTime=currentTime.toString()
+                var newKey=foundKey
 
-                val isDataNew:Boolean=checkDataNew()
-
-                if(isDataNew==true)
+                if(newKey=="")
                 {
                     var mLogBG:BGLevel= BGLevel(emailID,recentFood,recentEvent,BGLevel,insulinLevel,calendarTime)
                     var key:String=mFirebaseDatabaseReference.push().toString()
@@ -118,9 +133,16 @@ class LogBGActivity : AppCompatActivity() {
 
                     var mFirebaseDatabaseReference2=mFirebaseDatabase.getReference("BG Keys")
                     mFirebaseDatabaseReference2.push().setValue(parsedKey)
+                    Toast.makeText(applicationContext,"Your data has been saved to the cloud, and is viewable in the app calendar",Toast.LENGTH_SHORT).show()
                 }
 
-                Toast.makeText(applicationContext,"Your data has been saved to the cloud, and is viewable in the app calendar",Toast.LENGTH_SHORT).show()
+                else
+                {
+                    var mLogBG:BGLevel= BGLevel(emailID,recentFood,recentEvent,BGLevel,insulinLevel,calendarTime)
+                    var newKey=foundKey
+                    mFirebaseDatabaseReference.child(foundKey).setValue(mLogBG)
+                    Toast.makeText(applicationContext,"Your previous data has been updated with the new one",Toast.LENGTH_LONG).show()
+                }
 
             }
         }
@@ -139,9 +161,54 @@ class LogBGActivity : AppCompatActivity() {
     }
 
 
-    fun checkDataNew():Boolean
+    fun checkDataNew()
     {
+        /*var rootRef=FirebaseDatabase.getInstance().getReference("BG Keys")
 
-        return true
+        // Read from the database
+        rootRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                for(data:DataSnapshot in dataSnapshot.children)
+                {
+                    keyList.add(data.toString())
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+            }
+        })*/
+
+
+        var rootRef=FirebaseDatabase.getInstance().getReference("BG Data")
+
+
+        // Read from the database
+        rootRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                for(data:DataSnapshot in dataSnapshot.children)
+                {
+                        var oldEvent=data.child("recentEvent").getValue().toString()
+                        var oldDate:String=data.child("calendarTime").getValue().toString()
+                        var oldEmailID:String=data.child("emailID").getValue().toString()
+
+                        if(oldEvent.equals(recentEvent) && oldDate.equals(calendarTime) && oldEmailID.equals(emailID)) {
+                            foundKey = data.key.toString()
+                            isKeyFound = true
+                            return
+                        }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+            }
+        })
+        isKeyFound=false
+        return
     }
 }
