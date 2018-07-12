@@ -146,4 +146,16 @@
     <string name="checkInsulinBtnText">Check recommended level of Insulin</string>
     <string name="doneBGBtnText">Done</string>
 
+    <string-array name="food_array">
+        <item>Food1</item>
+        <item>Food2</item>
+        <item>Food3</item>
+    </string-array>
+
+    <string-array name="event_array">
+        <item>Event1</item>
+        <item>Event2</item>
+        <item>Event3</item>
+    </string-array>
+
 </resources>

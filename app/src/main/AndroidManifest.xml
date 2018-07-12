@@ -27,7 +27,8 @@
         <activity android:name=".Activities.Dashboard.DashboardActivity" />
         <activity android:name=".Activities.Calendar.MyCalendar" />
         <activity android:name=".Activities.Notes.NotesActivity" />
-        <activity android:name=".Activities.LogBG.LogBGActivity"></activity>
+        <activity android:name=".Activities.LogBG.LogBGActivity"
+            android:windowSoftInputMode="stateHidden" /> <!-- Hide software keyboard, cursor will still be visible -->>
     </application>
 
 </manifest>

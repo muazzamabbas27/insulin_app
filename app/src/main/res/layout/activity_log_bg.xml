@@ -114,47 +114,32 @@
             </Spinner>
 
             <Button
+                android:id="@+id/checkInsulinBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/checkInsulinBtn"
-                app:layout_constraintTop_toBottomOf="@+id/recentEventSpinner"
-                android:layout_marginTop="48dp"
-                android:textColor="#FFF"
-                android:background="@color/colorPrimaryDark"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginTop="48dp"
+                android:background="@color/colorPrimaryDark"
                 android:text="@string/checkInsulinBtnText"
-                android:textSize="16dp"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false"
+                android:textColor="@color/myWhite"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recentEventSpinner" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/showInsulinTextView"
-                app:layout_constraintTop_toBottomOf="@+id/checkInsulinBtn"
-                android:layout_marginTop="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"/>
-
-            <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/doneBGBtnText"
-                android:textSize="24dp"
-                android:textStyle="bold"
-                android:textColor="#FFF"
-                android:background="@color/colorPrimaryDark"
-                app:layout_constraintTop_toBottomOf="@+id/showInsulinTextView"
-                android:layout_marginTop="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"
-                android:textAllCaps="false" />
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="48dp"
+                android:textSize="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkInsulinBtn" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

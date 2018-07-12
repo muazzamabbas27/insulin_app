@@ -6,4 +6,5 @@
     <color name="textColor">#00008b</color>
     <color name="whiteColorCalendar">#FFF</color>
     <color name="yellowColorCalendarText">#FFFF00</color>
+    <color name="myWhite">#FFF</color>
 </resources>
