@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -33,7 +34,8 @@
             android:windowSoftInputMode="stateHidden" /> <!-- Hide software keyboard, cursor will still be visible -->
         >
         <activity android:name=".Activities.HealthArticles.HealthArticlesActivity" />
-        <activity android:name=".Activities.Doctors.DoctorActivity"></activity>
+        <activity android:name=".Activities.Doctors.DoctorActivity" />
+        <activity android:name=".Activities.Disclaimer.DisclaimerActivity"></activity>
     </application>
 
 </manifest>

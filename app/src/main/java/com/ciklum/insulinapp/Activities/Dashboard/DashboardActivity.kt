@@ -15,6 +15,7 @@ import android.view.MenuInflater
 import android.graphics.drawable.ColorDrawable
 import android.widget.Button
 import com.ciklum.insulinapp.Activities.Calendar.MyCalendar
+import com.ciklum.insulinapp.Activities.Disclaimer.DisclaimerActivity
 import com.ciklum.insulinapp.Activities.HealthArticles.HealthArticlesActivity
 import com.ciklum.insulinapp.Activities.LogBG.LogBGActivity
 
@@ -24,6 +25,7 @@ class DashboardActivity : AppCompatActivity() {
     private var calendarBtn: Button?=null
     private var logBGLevelBtn:Button?=null
     private var healthArticlesBtn:Button?=null
+    private var viewDisclaimerBtn:Button?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +35,7 @@ class DashboardActivity : AppCompatActivity() {
         calendarBtn=findViewById(R.id.calendarBtn)
         logBGLevelBtn=findViewById(R.id.logBGLevelBtn)
         healthArticlesBtn=findViewById(R.id.healthArticlesBtn)
+        viewDisclaimerBtn=findViewById(R.id.viewDisclaimerBtn)
 
         calendarBtn?.setOnClickListener()
         {
@@ -49,6 +52,12 @@ class DashboardActivity : AppCompatActivity() {
         healthArticlesBtn?.setOnClickListener()
         {
             val i:Intent=Intent(this,HealthArticlesActivity::class.java)
+            startActivity(i)
+        }
+
+        viewDisclaimerBtn?.setOnClickListener()
+        {
+            val i:Intent=Intent(this,DisclaimerActivity::class.java)
             startActivity(i)
         }
 

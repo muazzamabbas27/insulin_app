@@ -163,24 +163,6 @@ class LogBGActivity : AppCompatActivity() {
 
     fun checkDataNew()
     {
-        /*var rootRef=FirebaseDatabase.getInstance().getReference("BG Keys")
-
-        // Read from the database
-        rootRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                for(data:DataSnapshot in dataSnapshot.children)
-                {
-                    keyList.add(data.toString())
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-            }
-        })*/
-
 
         var rootRef=FirebaseDatabase.getInstance().getReference("BG Data")
 

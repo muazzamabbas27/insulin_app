@@ -126,6 +126,7 @@
     <string name="dashboardPageTitle">DASHBOARD</string>
     <string name="healthArticlesBtnText">View Health Articles</string>
     <string name="calendarBtnDashboardText">Check Calendar</string>
+    <string name="disclaimerBtnText">View Disclaimer</string>
 
 
     <!--Menu page text-->
@@ -158,5 +159,11 @@
         <item>Event2</item>
         <item>Event3</item>
     </string-array>
+
+
+    <!--Disclaimer page text-->
+    <string name="disclaimerTitleText">Disclaimer</string>
+    <string name="disclaimerText">This app only offers information on an advisory basis, please consult with your doctor prior to taking the recommedned amount of Insulin. For more information, please contact us at the following email address:</string>
+    <string name="emailIDBtnText">usama.jawad@gmail.com</string>
 
 </resources>
