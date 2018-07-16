@@ -41,7 +41,8 @@
             android:label="@string/title_activity_navigation_dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.Doctors.AddDoctorActivity" />
-        <activity android:name=".Activities.UserProfile.UserProfileActivity"></activity>
+        <activity android:name=".Activities.UserProfile.UserProfileActivity" />
+        <activity android:name=".Activities.UserProfile.EditUserProfileActivity"></activity>
     </application>
 
 </manifest>

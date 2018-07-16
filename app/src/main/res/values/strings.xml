@@ -128,6 +128,7 @@
     <string name="calendarBtnDashboardText">Check Calendar</string>
     <string name="disclaimerBtnText">View Disclaimer</string>
     <string name="doctorBtnText">View Doctor Info</string>
+    <string name="viewProfileBtnText">View Profile</string>
 
 
     <!--Menu page text-->
@@ -183,5 +184,10 @@
     <!--Modify Doctor Info page text-->
     <string name="modifyDoctorInfo">Modify Doctor Information</string>
     <string name="saveDoctorInfo">Save information of doctor</string>
+
+    <!--User Profile text-->
+    <string name="userProfileTitle">User Profile</string>
+    <string name="userProfileEmailID">Email ID:</string>
+    <string name="userProfileGender">Gender:</string>
 
 </resources>

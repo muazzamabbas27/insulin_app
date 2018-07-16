@@ -21,6 +21,7 @@ import com.ciklum.insulinapp.Activities.Disclaimer.DisclaimerActivity
 import com.ciklum.insulinapp.Activities.Doctors.DoctorActivity
 import com.ciklum.insulinapp.Activities.HealthArticles.HealthArticlesActivity
 import com.ciklum.insulinapp.Activities.LogBG.LogBGActivity
+import com.ciklum.insulinapp.Activities.UserProfile.UserProfileActivity
 
 
 class DashboardActivity : AppCompatActivity() {
@@ -30,6 +31,7 @@ class DashboardActivity : AppCompatActivity() {
     private var healthArticlesBtn:Button?=null
     private var viewDisclaimerBtn:Button?=null
     private var viewDoctorInfoBtn:Button?=null
+    private var viewProfileBtn:Button?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +43,8 @@ class DashboardActivity : AppCompatActivity() {
         healthArticlesBtn=findViewById(R.id.healthArticlesBtn)
         viewDisclaimerBtn=findViewById(R.id.viewDisclaimerBtn)
         viewDoctorInfoBtn=findViewById(R.id.viewDoctorInfoBtn)
+        viewProfileBtn=findViewById(R.id.viewProfileBtn)
+
 
         calendarBtn?.setOnClickListener()
         {
@@ -69,6 +73,12 @@ class DashboardActivity : AppCompatActivity() {
         viewDoctorInfoBtn?.setOnClickListener()
         {
             val i=Intent(this,DoctorActivity::class.java)
+            startActivity(i)
+        }
+
+        viewProfileBtn?.setOnClickListener()
+        {
+            val i=Intent(this,UserProfileActivity::class.java)
             startActivity(i)
         }
     }
