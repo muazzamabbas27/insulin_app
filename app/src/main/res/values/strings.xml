@@ -130,6 +130,7 @@
     <string name="doctorBtnText">View Doctor Info</string>
     <string name="viewProfileBtnText">View Profile</string>
     <string name="editProfileBtnText">Edit Profile</string>
+    <string name="medicineReminderBtnText">Set Medicine Reminder</string>
 
 
     <!--Menu page text-->
@@ -197,5 +198,9 @@
     <string name="editProfileAge">Age:</string>
     <string name="editProfileGender">Gender:</string>
     <string name="saveEditsBtnText">Save edits</string>
+
+    <!--Medicine reminder page text-->
+    <string name="medicineReminderTitle">Medicine Reminder</string>
+    <string name="pickTime">Pick Time</string>
 
 </resources>
