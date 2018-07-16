@@ -129,6 +129,7 @@
     <string name="disclaimerBtnText">View Disclaimer</string>
     <string name="doctorBtnText">View Doctor Info</string>
     <string name="viewProfileBtnText">View Profile</string>
+    <string name="editProfileBtnText">Edit Profile</string>
 
 
     <!--Menu page text-->
@@ -189,5 +190,12 @@
     <string name="userProfileTitle">User Profile</string>
     <string name="userProfileEmailID">Email ID:</string>
     <string name="userProfileGender">Gender:</string>
+
+    <!--Edit User Profile page text-->
+    <string name="editProfileTitle">Edit Profile</string>
+    <string name="editProfileName">Name:</string>
+    <string name="editProfileAge">Age:</string>
+    <string name="editProfileGender">Gender:</string>
+    <string name="saveEditsBtnText">Save edits</string>
 
 </resources>
