@@ -35,7 +35,13 @@
         >
         <activity android:name=".Activities.HealthArticles.HealthArticlesActivity" />
         <activity android:name=".Activities.Doctors.DoctorActivity" />
-        <activity android:name=".Activities.Disclaimer.DisclaimerActivity"></activity>
+        <activity android:name=".Activities.Disclaimer.DisclaimerActivity" />
+        <activity
+            android:name=".NavigationDashboard"
+            android:label="@string/title_activity_navigation_dashboard"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.Doctors.AddDoctorActivity" />
+        <activity android:name=".Activities.UserProfile.UserProfileActivity"></activity>
     </application>
 
 </manifest>

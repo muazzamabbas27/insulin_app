@@ -14,7 +14,6 @@ import com.ciklum.insulinapp.Activities.SplashScreen.mAuth
 import com.ciklum.insulinapp.R
 import android.net.NetworkInfo
 import android.content.Context.CONNECTIVITY_SERVICE
-import android.support.v4.content.ContextCompat.getSystemService
 import android.net.ConnectivityManager
 import android.view.View
 

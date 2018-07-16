@@ -106,7 +106,7 @@ class LogBGActivity : AppCompatActivity() {
         val df = SimpleDateFormat("dd-MMM-yyyy")
         val currentTime = df.format(c)
 
-        insulinLevel="Test"
+        //insulinLevel="Test"
         checkInsulinBtn=findViewById(R.id.checkInsulinBtn)
         calendarTime=currentTime.toString()
 
