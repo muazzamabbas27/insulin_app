@@ -202,5 +202,7 @@
     <!--Medicine reminder page text-->
     <string name="medicineReminderTitle">Medicine Reminder</string>
     <string name="pickTime">Pick Time</string>
+    <string name="stopAlarm">Stop Alarm</string>
+
 
 </resources>

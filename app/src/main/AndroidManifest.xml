@@ -36,14 +36,13 @@
         <activity android:name=".Activities.HealthArticles.HealthArticlesActivity" />
         <activity android:name=".Activities.Doctors.DoctorActivity" />
         <activity android:name=".Activities.Disclaimer.DisclaimerActivity" />
-        <activity
-            android:name=".NavigationDashboard"
-            android:label="@string/title_activity_navigation_dashboard"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.Doctors.AddDoctorActivity" />
         <activity android:name=".Activities.UserProfile.UserProfileActivity" />
         <activity android:name=".Activities.UserProfile.EditUserProfileActivity" />
         <activity android:name=".Activities.MedicineReminder.ReminderActivity"></activity>
+        <receiver android:name=".Models.AlarmReceiver"/>
+        <service android:name=".Models.RingtoneService"
+            android:enabled="true"/>
     </application>
 
 </manifest>
