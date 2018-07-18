@@ -3,10 +3,7 @@ package com.ciklum.insulinapp.Activities.Notes
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.ciklum.insulinapp.Activities.Calendar.MyCalendar
 import com.ciklum.insulinapp.Activities.Dashboard.DashboardActivity
 import com.ciklum.insulinapp.Activities.SplashScreen.currentUser
@@ -40,6 +37,11 @@ class NotesActivity : AppCompatActivity() {
     var saveNotes:String="";
     lateinit var currentUserEmailID:String
 
+    private lateinit var tempDate:String
+    private lateinit var tempMonth:String
+    private lateinit var tempYear:String
+    private lateinit var monthString:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notes)
@@ -48,14 +50,16 @@ class NotesActivity : AppCompatActivity() {
 
         var notesDate:String=""
 
-        var tempDate=bundle.getString("date")
-        var tempMonth=bundle.getString("month")
-        val tempYear=bundle.getString("year")
+        tempDate=bundle.getString("date")
+        tempMonth=bundle.getString("month")
+        tempYear=bundle.getString("year")
+        convertMonthNumbertoWord()
 
         notesDate=notesDate + tempDate+"/"+tempMonth+"/"+tempYear
+        var displayDate=tempDate+"-"+monthString+"-"+tempYear
 
         dateTextView=findViewById(R.id.dateTextView)
-        dateTextView.setText(notesDate)
+        dateTextView.setText(displayDate)
 
         notesEditText=findViewById(R.id.notesEditText)
 
@@ -106,6 +110,68 @@ class NotesActivity : AppCompatActivity() {
             startActivity(i)
             finish()
         }
+    }
 
+    fun convertMonthNumbertoWord()
+    {
+        if(tempMonth.equals("1"))
+        {
+            monthString="Jan"
+        }
+
+        else if(tempMonth.equals("2"))
+        {
+            monthString="Feb"
+        }
+
+        else if(tempMonth.equals("3"))
+        {
+            monthString="Mar"
+        }
+
+        else if(tempMonth.equals("4"))
+        {
+            monthString="Apr"
+        }
+
+        else if(tempMonth.equals("5"))
+        {
+            monthString="May"
+        }
+
+        else if(tempMonth.equals("6"))
+        {
+            monthString="Jun"
+        }
+
+        else if(tempMonth.equals("7"))
+        {
+            monthString="Jul"
+        }
+
+        else if(tempMonth.equals("8"))
+        {
+            monthString="Aug"
+        }
+
+        else if(tempMonth.equals("9"))
+        {
+            monthString="Sep"
+        }
+
+        else if(tempMonth.equals("10"))
+        {
+            monthString="Oct"
+        }
+
+        else if(tempMonth.equals("11"))
+        {
+            monthString="Nov"
+        }
+
+        else
+        {
+            monthString="Dec"
+        }
     }
 }

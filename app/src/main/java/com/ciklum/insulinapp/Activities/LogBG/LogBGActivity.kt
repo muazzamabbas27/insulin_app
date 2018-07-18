@@ -3,6 +3,7 @@ package com.ciklum.insulinapp.Activities.LogBG
 import android.icu.util.Calendar
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.*
 import com.ciklum.insulinapp.Activities.SplashScreen.mDatabaseReference
 import com.ciklum.insulinapp.Models.BGLevel
 import com.ciklum.insulinapp.R
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -18,8 +20,7 @@ import java.text.SimpleDateFormat
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ValueEventListener
-
-
+import java.util.concurrent.TimeUnit
 
 
 class LogBGActivity : AppCompatActivity() {
@@ -45,6 +46,7 @@ class LogBGActivity : AppCompatActivity() {
     var keyList: ArrayList<String> = ArrayList(1000)
     private var foundKey:String=""
     private var isKeyFound:Boolean=false
+    private var delayMethod:Boolean=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,7 +108,7 @@ class LogBGActivity : AppCompatActivity() {
         val df = SimpleDateFormat("dd-MMM-yyyy")
         val currentTime = df.format(c)
 
-        //insulinLevel="Test"
+        insulinLevel="Test"
         checkInsulinBtn=findViewById(R.id.checkInsulinBtn)
         calendarTime=currentTime.toString()
 
@@ -163,12 +165,9 @@ class LogBGActivity : AppCompatActivity() {
 
     fun checkDataNew()
     {
-
-        var rootRef=FirebaseDatabase.getInstance().getReference("BG Data")
-
-
+        var rootRef3=FirebaseDatabase.getInstance().getReference("BG Data")
         // Read from the database
-        rootRef.addValueEventListener(object : ValueEventListener {
+        rootRef3.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.

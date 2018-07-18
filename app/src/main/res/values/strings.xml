@@ -205,4 +205,16 @@
     <string name="stopAlarm">Stop Alarm</string>
 
 
+    <!--BG Level RecyclerView text-->
+    <string name="eventTitleText">Event:</string>
+    <string name="foodTitleText">Food Intake:</string>
+    <string name="bgTitleText">Blood Glucose Level:</string>
+    <string name="insulinTitleText">Insulin Recommended:</string>
+
+    <string name="eventText">-</string>
+    <string name="foodText">-</string>
+    <string name="bgText">-</string>
+    <string name="insulinText">-</string>
+
+
 </resources>
