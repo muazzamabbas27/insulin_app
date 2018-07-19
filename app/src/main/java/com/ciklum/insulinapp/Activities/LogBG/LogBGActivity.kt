@@ -120,12 +120,12 @@ class LogBGActivity : AppCompatActivity() {
             {
                 var rootRef4=FirebaseDatabase.getInstance().getReference("BG Data")
                 // Read from the database
-                rootRef4.addValueEventListener(object : ValueEventListener {
+                rootRef4.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         // This method is called once with the initial value and again
                         // whenever data at this location is updated.
                         newDataInserted=false
-                        if(dataSnapshot.hasChildren()==false)   //if the DB is not yet created
+                        if(dataSnapshot.exists()==false)   //if the DB is not yet created
                         {
                             var mLogBG:BGLevel= BGLevel(emailID,recentFood,recentEvent,BGLevel,insulinLevel,calendarTime)
                             var key:String=mFirebaseDatabaseReference.push().toString()
@@ -164,25 +164,22 @@ class LogBGActivity : AppCompatActivity() {
                                         Toast.makeText(applicationContext, "Your previous data has been updated with the new one", Toast.LENGTH_SHORT).show()
                                         newDataInserted=true
                                     }
-                                    else
-                                    {
-                                        if(newDataInserted==false) {
-                                            var mLogBG: BGLevel = BGLevel(emailID, recentFood, recentEvent, BGLevel, insulinLevel, calendarTime)
-                                            var key: String = mFirebaseDatabaseReference.push().toString()
-
-                                            var parsedKeyList = key.split("/-")
-                                            var parsedKey = parsedKeyList[1]
-                                            parsedKey = "-" + parsedKey
-
-                                            mFirebaseDatabaseReference.child(parsedKey).setValue(mLogBG)
-
-                                            var mFirebaseDatabaseReference2 = mFirebaseDatabase.getReference("BG Keys")
-                                            mFirebaseDatabaseReference2.push().setValue(parsedKey)
-                                            Toast.makeText(applicationContext, "Your data has been uploaded to the cloud", Toast.LENGTH_SHORT).show()
-                                            newDataInserted = true
-                                        }
-                                    }
                                 }
+                            }
+                            if(newDataInserted==false) {
+                                var mLogBG: BGLevel = BGLevel(emailID, recentFood, recentEvent, BGLevel, insulinLevel, calendarTime)
+                                var key: String = mFirebaseDatabaseReference.push().toString()
+
+                                var parsedKeyList = key.split("/-")
+                                var parsedKey = parsedKeyList[1]
+                                parsedKey = "-" + parsedKey
+
+                                mFirebaseDatabaseReference.child(parsedKey).setValue(mLogBG)
+
+                                var mFirebaseDatabaseReference2 = mFirebaseDatabase.getReference("BG Keys")
+                                mFirebaseDatabaseReference2.push().setValue(parsedKey)
+                                Toast.makeText(applicationContext, "Your data has been uploaded to the cloud", Toast.LENGTH_SHORT).show()
+                                newDataInserted = true
                             }
                         }
                     }
