@@ -26,6 +26,114 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/showInsulinTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:textColor="@color/myRed"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/correctionFactorEditText" />
+
+            <EditText
+                android:id="@+id/correctionFactorEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/correctionFactorTextView" />
+
+            <TextView
+                android:id="@+id/correctionFactorTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/correctionFactorText"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.75"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/CHODisposedEditText" />
+
+            <EditText
+                android:id="@+id/CHODisposedEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/CHODisposedTextView" />
+
+            <TextView
+                android:id="@+id/CHODisposedTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/gramsDisposedText"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/CHOEditText" />
+
+            <EditText
+                android:id="@+id/CHOEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/CHOTextView" />
+
+            <EditText
+                android:id="@+id/targetBGEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/targetBGTextView" />
+
+            <TextView
                 android:id="@+id/BGTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,19 +151,20 @@
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/currentBGTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/currentBGTextView"
-                android:text="@string/EnterBGLevelText"
-                app:layout_constraintTop_toBottomOf="@+id/BGTitleTextView"
-                android:layout_marginTop="32dp"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/EnterBGLevelText"
+                android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginRight="8dp"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/BGTitleTextView" />
 
             <EditText
-                android:id="@+id/BGLevelEditText"
+                android:id="@+id/currentBGEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -67,51 +176,30 @@
                 app:layout_constraintTop_toBottomOf="@+id/currentBGTextView" />
 
             <TextView
+                android:id="@+id/targetBGTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/recentFoodIntakeTextView"
-                app:layout_constraintTop_toBottomOf="@+id/BGLevelEditText"
-                android:layout_marginTop="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
-                android:text="@string/foodIntakeText" />
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/recentFoodIntakeSpinner"
-                app:layout_constraintTop_toBottomOf="@+id/recentFoodIntakeTextView"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="24dp"
+                android:text="@string/targetBGLevelText"
+                android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currentBGEditText" />
 
             <TextView
+                android:id="@+id/CHOTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/logBGTextView"
-                android:text="@string/recentEventText"
-                app:layout_constraintTop_toBottomOf="@+id/recentFoodIntakeSpinner"
-                android:layout_marginTop="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"/>
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/recentEventSpinner"
-                app:layout_constraintTop_toBottomOf="@+id/logBGTextView"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp">
-            </Spinner>
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/CHOText"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/targetBGEditText" />
 
             <Button
                 android:id="@+id/checkInsulinBtn"
@@ -119,27 +207,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="32dp"
                 android:background="@color/colorPrimaryDark"
                 android:text="@string/checkInsulinBtnText"
                 android:textAllCaps="false"
                 android:textColor="@color/myWhite"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recentEventSpinner" />
-
-            <TextView
-                android:id="@+id/showInsulinTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="48dp"
-                android:textSize="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkInsulinBtn" />
+                app:layout_constraintTop_toBottomOf="@+id/showInsulinTextView" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

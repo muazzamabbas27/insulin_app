@@ -19,10 +19,9 @@ class EditUserProfileActivity : AppCompatActivity() {
 
     private lateinit var nameEditText: EditText
     private lateinit var ageSpinner: Spinner
+    private lateinit var weightEditText: EditText
+    private lateinit var heightEditText: EditText
     private lateinit var saveEditsBtn:Button
-
-    var Age:Int=-1
-    lateinit var Gender:String
 
     private var mFirebaseUser: FirebaseUser?=null
     private var mAuth: FirebaseAuth?=null
@@ -32,6 +31,8 @@ class EditUserProfileActivity : AppCompatActivity() {
     private lateinit var currentUserEmailID:String
 
     private var mAge:Int=-1
+    private var mWeight:Int=-1
+    private var mHeight:Int=-1
     private lateinit var mName:String
     private var mGender:String=""
 
@@ -42,6 +43,8 @@ class EditUserProfileActivity : AppCompatActivity() {
 
         nameEditText=findViewById(R.id.nameEditText)
         ageSpinner=findViewById(R.id.ageSpinner)
+        weightEditText=findViewById(R.id.weightEditText)
+        heightEditText=findViewById(R.id.heightEditText)
         saveEditsBtn=findViewById(R.id.saveEditsBtn)
 
         val adapter = ArrayAdapter.createFromResource(this, R.array.age_array, android.R.layout.simple_spinner_item)
@@ -68,10 +71,14 @@ class EditUserProfileActivity : AppCompatActivity() {
                         var userName = data.child("mname").getValue().toString().trim()
                         var userAge = data.child("mage").getValue().toString().trim()
                         var userGender = data.child("mgender").getValue().toString().trim()
+                        var userWeight=data.child("mweight").getValue().toString().trim()
+                        var userHeight=data.child("mheight").getValue().toString().trim()
 
                         mName=userName
                         mAge=userAge.toInt()
                         mGender=userGender
+                        mWeight=userWeight.toInt()
+                        mHeight=userHeight.toInt()
 
 
                         if(mGender=="Male")
@@ -88,6 +95,8 @@ class EditUserProfileActivity : AppCompatActivity() {
 
                         ageSpinner.setSelection(mAge-5)
                         nameEditText.setText(mName)
+                        weightEditText.setText(userWeight)
+                        heightEditText.setText(userHeight)
                     }
                 }
             }
@@ -130,17 +139,40 @@ class EditUserProfileActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            var strWeight=weightEditText.text.toString().trim()
+            if(TextUtils.isEmpty(strWeight))
+            {
+                Toast.makeText(this,"You haven't entered your weight",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            else
+            {
+                mWeight=strWeight.toInt()
+            }
+
+            var strHeight=heightEditText.text.toString().trim()
+            if(TextUtils.isEmpty(strHeight))
+            {
+                Toast.makeText(this,"You haven't entered your height",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            else
+            {
+                mHeight=strHeight.toInt()
+            }
+
             mFirebaseDatabaseReference = mFirebaseDatabase?.getReference("User").child(mFirebaseUser!!.uid)
 
             mFirebaseDatabaseReference?.child("mname")?.setValue(mName)
             mFirebaseDatabaseReference?.child("mage")?.setValue(mAge)
             mFirebaseDatabaseReference?.child("mgender")?.setValue(mGender)
+            mFirebaseDatabaseReference?.child("mweight")?.setValue(mWeight)
+            mFirebaseDatabaseReference?.child("mheight")?.setValue(mHeight)
 
             Toast.makeText(this,"Your data has been updated",Toast.LENGTH_SHORT).show()
 
             val i= Intent(this,UserProfileActivity::class.java)
             startActivity(i)
-            finish()
         }
     }
 

@@ -113,6 +113,8 @@
     <string name="genderMaleText">Male</string>
     <string name="genderFemaleText">Female</string>
     <string name="ageText">Age:</string>
+    <string name="weightText">Weight (kg):</string>
+    <string name="heightText">Height (cm):</string>
     <string name="confirmBtnText">CONFIRM</string>
 
 
@@ -146,9 +148,11 @@
 
     <!--Log BG Level page text-->
     <string name="LogBGTitle">Log Blood Glucose</string>
-    <string name="EnterBGLevelText">"*Enter current Blood Glucose level (mmol/L):</string>
-    <string name="foodIntakeText">*Select recent food intake:</string>
-    <string name="recentEventText">*Select recent event:</string>
+    <string name="EnterBGLevelText">"*Enter current Blood Glucose level (mg/dl):</string>
+    <string name="targetBGLevelText">*Enter target Blood Glucose level (mg/dl):</string>
+    <string name="CHOText">*Enter total amount of CHO in meal (g):</string>
+    <string name="gramsDisposedText">*Enter amount of CHO disposed by 1 unit of Insulin (g):</string>
+    <string name="correctionFactorText">*Enter correction factor (Points of blood sugar level dropped with 1 unit of Insulin):</string>
     <string name="checkInsulinBtnText">Check recommended level of Insulin</string>
     <string name="doneBGBtnText">Done</string>
 

@@ -15,6 +15,8 @@ class UserProfileActivity : AppCompatActivity() {
     private lateinit var ageTextView:TextView
     private lateinit var emailIDTextView:TextView
     private lateinit var genderTextView:TextView
+    private lateinit var weightTextView:TextView
+    private lateinit var heightTextView: TextView
 
     private var mFirebaseUser: FirebaseUser?=null
     private var mAuth: FirebaseAuth?=null
@@ -31,6 +33,9 @@ class UserProfileActivity : AppCompatActivity() {
         ageTextView=findViewById(R.id.ageTextView)
         emailIDTextView=findViewById(R.id.emailIDTextView)
         genderTextView=findViewById(R.id.genderTextView)
+        weightTextView=findViewById(R.id.weightTextView)
+        heightTextView=findViewById(R.id.heightTextView)
+
 
         mAuth=FirebaseAuth.getInstance()
         mFirebaseUser=mAuth?.currentUser
@@ -57,11 +62,15 @@ class UserProfileActivity : AppCompatActivity() {
                         var userAge = data.child("mage").getValue().toString().trim()
                         var userEmailID = data.child("emailID").getValue().toString().trim()
                         var userGender = data.child("mgender").getValue().toString().trim()
+                        var userWeight=data.child("mweight").getValue().toString().trim()
+                        var userHeight=data.child("mheight").getValue().toString().trim()
 
                         nameTextView.setText(userName)
                         ageTextView.setText(userAge)
                         emailIDTextView.setText(userEmailID)
                         genderTextView.setText(userGender)
+                        weightTextView.setText(userWeight)
+                        heightTextView.setText(userHeight)
                     }
                 }
             }

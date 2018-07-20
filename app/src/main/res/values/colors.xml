@@ -8,4 +8,5 @@
     <color name="yellowColorCalendarText">#FFFF00</color>
     <color name="myWhite">#FFF</color>
     <color name="myGreen">#008000</color>
+    <color name="myRed">#FF0000</color>
 </resources>

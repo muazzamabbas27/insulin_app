@@ -37,15 +37,19 @@ class RegisterActivity : AppCompatActivity(){
     lateinit var passwordEditText:EditText
     lateinit var confirmPasswordEditText:EditText
     lateinit var nameEditText:EditText
+    lateinit var weightEditText: EditText
+    lateinit var heightEditText: EditText
     lateinit var myContext:Context
 
     //Attributes for User object
     lateinit var emailID:String
-    lateinit var Name:String
-    lateinit var Password:String
+    lateinit var mName:String
+    lateinit var mPassword:String
     lateinit var confirmPassword:String
-    var Age:Int=-1
-    lateinit var Gender:String
+    var mAge:Int=-1
+    var mWeight:Int=-1
+    var mHeight:Int=-1
+    lateinit var mGender:String
 
 
     var mUser:User?=null
@@ -61,6 +65,8 @@ class RegisterActivity : AppCompatActivity(){
         passwordEditText=findViewById(R.id.passwordEditText)
         confirmPasswordEditText=findViewById(R.id.confirmPasswordEditText)
         nameEditText=findViewById(R.id.nameEditText)
+        weightEditText=findViewById(R.id.weightEditText)
+        heightEditText=findViewById(R.id.heightEditText)
         myContext=applicationContext
 
         val adapter = ArrayAdapter.createFromResource(this, R.array.age_array, android.R.layout.simple_spinner_item)
@@ -71,14 +77,14 @@ class RegisterActivity : AppCompatActivity(){
         ageSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 //On nothing selected, do nothing
-                Age=5
+                mAge=5
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedItem=parent?.getItemAtPosition(position).toString()
                 if(selectedItem!=null)                  //if an item is selected
                 {
-                    Age=selectedItem.toInt()            //convert it to an integer and save in variable
+                    mAge=selectedItem.toInt()            //convert it to an integer and save in variable
                 }
             }
         }
@@ -112,7 +118,7 @@ class RegisterActivity : AppCompatActivity(){
 
                 if(emailFormat==true && isNetworkCheck==true)
                 {
-                    mAuth?.createUserWithEmailAndPassword(emailID, Password)
+                    mAuth?.createUserWithEmailAndPassword(emailID, mPassword)
                             ?.addOnCompleteListener(this) { task ->
                                 if (task.isSuccessful) {
                                     // Sign in success, update UI with the signed-in user's information
@@ -120,7 +126,7 @@ class RegisterActivity : AppCompatActivity(){
                                     Toast.makeText(this,"Authentication successful!",Toast.LENGTH_SHORT).show()
                                     mDatabaseReference = mDatabase?.getReference("User")
                                     mDatabaseReference= mDatabaseReference?.child(user?.uid)
-                                    mUser=User(emailID,Name,Age,Gender,false)
+                                    mUser=User(emailID,mName,mAge,mGender,false,mWeight,mHeight)
                                     mDatabaseReference?.setValue(mUser)
                                     startActivity(i)
                                     finish()
@@ -149,13 +155,13 @@ class RegisterActivity : AppCompatActivity(){
         // Check which radio button was clicked
         when (view.getId()) {
             R.id.radioMale ->{
-                Gender="Male"
+                mGender="Male"
             }
             R.id.radioFemale ->{
-                Gender="Female"
+                mGender="Female"
             }
             else->{
-                Gender=""
+                mGender=""
             }
         }
     }
@@ -173,8 +179,8 @@ class RegisterActivity : AppCompatActivity(){
             return false
         }
 
-        Password=passwordEditText.text.toString().trim()
-        if(TextUtils.isEmpty(Password))
+        mPassword=passwordEditText.text.toString().trim()
+        if(TextUtils.isEmpty(mPassword))
         {
             Toast.makeText(this,"You haven't entered your password",Toast.LENGTH_SHORT).show()
             return false
@@ -188,25 +194,48 @@ class RegisterActivity : AppCompatActivity(){
         }
 
 
-        if(Password.equals(confirmPassword)==false)
+        if(mPassword.equals(confirmPassword)==false)
         {
             Toast.makeText(this,"Your passwords don't match",Toast.LENGTH_SHORT).show()
             return false
         }
 
-        Name=nameEditText.text.toString().trim()
-        if(TextUtils.isEmpty(Name))
+        mName=nameEditText.text.toString().trim()
+        if(TextUtils.isEmpty(mName))
         {
             Toast.makeText(this,"You haven't entered your name",Toast.LENGTH_SHORT).show()
             return false
         }
 
 
-        if(Gender.equals(""))
+        if(mGender.equals(""))
         {
             Toast.makeText(this,"You haven't selected your gender",Toast.LENGTH_SHORT).show()
             return false
         }
+
+        var strWeight=weightEditText.text.toString().trim()
+        if(TextUtils.isEmpty(strWeight))
+        {
+            Toast.makeText(this,"You haven't entered your weight",Toast.LENGTH_SHORT).show()
+            return false
+        }
+        else
+        {
+            mWeight=strWeight.toInt()
+        }
+
+        var strHeight=heightEditText.text.toString().trim()
+        if(TextUtils.isEmpty(strHeight))
+        {
+            Toast.makeText(this,"You haven't entered your height",Toast.LENGTH_SHORT).show()
+            return false
+        }
+        else
+        {
+            mHeight=strHeight.toInt()
+        }
+
         return true
     }
 
