@@ -42,7 +42,7 @@ class RingtoneService:Service(){
 
         if(!this.isRunning && id==1)
         {
-            playAlarm()
+            //playAlarm()
             this.isRunning=true
             this.id=0
             fireNotification()
@@ -82,15 +82,19 @@ class RingtoneService:Service(){
 
         var notifyManager: NotificationManager =getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+
         var notification:Notification=Notification.Builder(this)
                 .setContentTitle("Medicine Time")
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setSound(defaultSoundUri)
+                //.setSound(defaultSoundUri)
                 .setContentText("Time to take your medicine")
                 .setContentIntent(p1)
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
                 .build()
+
+        var ring:Ringtone=RingtoneManager.getRingtone(applicationContext,defaultSoundUri)
+        ring.play()
 
 
         notifyManager.notify(0,notification)

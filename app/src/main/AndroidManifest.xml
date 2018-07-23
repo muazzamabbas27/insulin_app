@@ -30,7 +30,7 @@
         <activity android:name=".Activities.Calendar.MyCalendar" />
         <activity android:name=".Activities.Notes.NotesActivity" />
         <activity
-            android:name=".Activities.LogBG.LogBGActivity"
+            android:name=".Activities.LogBG.LogBolusBGActivity"
             android:windowSoftInputMode="stateHidden" /> <!-- Hide software keyboard, cursor will still be visible -->
         >
         <activity android:name=".Activities.HealthArticles.HealthArticlesActivity" />
@@ -39,10 +39,15 @@
         <activity android:name=".Activities.Doctors.AddDoctorActivity" />
         <activity android:name=".Activities.UserProfile.UserProfileActivity" />
         <activity android:name=".Activities.UserProfile.EditUserProfileActivity" />
-        <activity android:name=".Activities.MedicineReminder.ReminderActivity"></activity>
-        <receiver android:name=".Models.AlarmReceiver"/>
-        <service android:name=".Models.RingtoneService"
-            android:enabled="true"/>
+        <activity android:name=".Activities.MedicineReminder.ReminderActivity" />
+
+        <receiver android:name=".Models.AlarmReceiver" />
+
+        <service
+            android:name=".Models.RingtoneService"
+            android:enabled="true" />
+
+        <activity android:name=".Activities.LogBG.LogBasalBGActivity"></activity>
     </application>
 
 </manifest>

@@ -126,6 +126,7 @@
 
     <!--Dashboard page text-->
     <string name="dashboardPageTitle">DASHBOARD</string>
+    <string name="logBolusBGBtnText">Log bolus blood glucose level</string>
     <string name="healthArticlesBtnText">View Health Articles</string>
     <string name="calendarBtnDashboardText">Check Calendar</string>
     <string name="disclaimerBtnText">View Disclaimer</string>
@@ -133,7 +134,7 @@
     <string name="viewProfileBtnText">View Profile</string>
     <string name="editProfileBtnText">Edit Profile</string>
     <string name="medicineReminderBtnText">Set Medicine Reminder</string>
-
+    <string name="logBasalBGBtnText">Log basal blood glucose level</string>
 
     <!--Menu page text-->
     <string name="menuPageLogoutTitle">Logout</string>
@@ -146,32 +147,25 @@
     <string name="saveNotesBtnText">Save Notes</string>
 
 
-    <!--Log BG Level page text-->
-    <string name="LogBGTitle">Log Blood Glucose</string>
+    <!--Log Bolus BG Level page text-->
+    <string name="LogBolusBGTitle">Log Bolus Blood Glucose</string>
     <string name="EnterBGLevelText">"*Enter current Blood Glucose level (mg/dl):</string>
     <string name="targetBGLevelText">*Enter target Blood Glucose level (mg/dl):</string>
     <string name="CHOText">*Enter total amount of CHO in meal (g):</string>
     <string name="gramsDisposedText">*Enter amount of CHO disposed by 1 unit of Insulin (g):</string>
     <string name="correctionFactorText">*Enter correction factor (Points of blood sugar level dropped with 1 unit of Insulin):</string>
-    <string name="checkInsulinBtnText">Check recommended level of Insulin</string>
+    <string name="checkInsulinBtnText">Calculate recommended Bolus Insulin</string>
     <string name="doneBGBtnText">Done</string>
 
-    <string-array name="food_array">
-        <item>Food1</item>
-        <item>Food2</item>
-        <item>Food3</item>
-    </string-array>
-
-    <string-array name="event_array">
-        <item>Event1</item>
-        <item>Event2</item>
-        <item>Event3</item>
-    </string-array>
-
+    <!--Log Basal BG Level pag etext-->
+    <string name="logBasalBGTitle">Log Basal Blood Glucose</string>
+    <string name="weightLabelText">Weight (kg):</string>
+    <string name="TDIText">Total Daily Basal Insulin recommendation (units):</string>
+    <string name="calculateBasalBtnText">Calculate recommended Basal Insulin</string>
 
     <!--Disclaimer page text-->
     <string name="disclaimerTitleText">Disclaimer</string>
-    <string name="disclaimerText">This app only offers information on an advisory basis, please consult with your doctor prior to taking the recommedned amount of Insulin. For more information, please contact us at the following email address:</string>
+    <string name="disclaimerText">This app only offers information on an advisory basis, please consult your doctor prior to taking the recommended amount of Insulin. For more information, please contact us at the following email address:</string>
     <string name="emailIDBtnText">usama.jawad@gmail.com</string>
     <string name="title_activity_navigation_dashboard">NavigationDashboard</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -180,7 +174,16 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
+    <string name="formulasText">Formulas for Insulin dose calculation (as recommended by Diabetes Education Online):
+                                \n\n
+                                Bolus:
+                                \n\n
+                                [(Total grams of CHO in meal)/(Grams of CHO disposed by 1 unit of Insulin)] \n\n + \n\n [(Difference between actual blood sugar level and target blood sugar level)/ Correction factor]
+                                \n\n
+                                Basal:
+                                \n\n
+                                0.5 \n\n * \n\n (0.55 * weight in kg)
+                                </string>
 
     <!--Doctors page text-->
     <string name="contactDoctorTitleText">Contact Doctor</string>
@@ -219,6 +222,7 @@
     <string name="foodText">-</string>
     <string name="bgText">-</string>
     <string name="insulinText">-</string>
+
 
 
 </resources>
