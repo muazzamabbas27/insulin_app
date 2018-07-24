@@ -50,10 +50,14 @@ class MyCalendar : AppCompatActivity() {
 
     private lateinit var currentCompleteDate:String
 
-    private lateinit var bgDB:String
-    private lateinit var foodDB:String
-    private lateinit var insulinDB:String
     private lateinit var eventDB:String
+    private lateinit var currentBGDB:String
+    private lateinit var targetBGDB:String
+    private lateinit var amountOfCHODB:String
+    private lateinit var disposedCHODB:String
+    private lateinit var correctionFactorDB:String
+    private lateinit var insulinRecommendationDB:String
+    private lateinit var typeOfInsulinDB:String
 
     private lateinit var RV1: RecyclerView
     var mBGList: ArrayList<BGRecyclerView> = ArrayList(1000)
@@ -70,8 +74,8 @@ class MyCalendar : AppCompatActivity() {
 
         mAuth =FirebaseAuth.getInstance()
         mFirebaseDatabase = FirebaseDatabase.getInstance()
-        mFirebaseDatabaseReference = mFirebaseDatabase?.getReference("BG Data")
-        rootRef=FirebaseDatabase.getInstance().getReference("BG Data")
+        mFirebaseDatabaseReference = mFirebaseDatabase?.getReference("Bolus BG Data")
+        rootRef=FirebaseDatabase.getInstance().getReference("Bolus BG Data")
 
         mFirebaseUser= mAuth.currentUser!!
 
@@ -105,11 +109,15 @@ class MyCalendar : AppCompatActivity() {
                         datesList.add(dateDB)
                         if(dateDB.equals(currentCompleteDate))
                         {
-                            bgDB=data.child("bglevel").getValue().toString().trim()
-                            foodDB=data.child("foodIntake").getValue().toString().trim()
-                            insulinDB=data.child("insulinLevel").getValue().toString().trim()
-                            eventDB=data.child("recentEvent").getValue().toString().trim()
-                            var mBGRecyclerView: BGRecyclerView= BGRecyclerView(foodDB,eventDB,bgDB,insulinDB)
+                            eventDB=data.child("beforeEvent").getValue().toString().trim()
+                            currentBGDB=data.child("currentBGLevel").getValue().toString().trim()
+                            targetBGDB=data.child("targetBGLevel").getValue().toString().trim()
+                            amountOfCHODB=data.child("totalCHO").getValue().toString().trim()
+                            disposedCHODB=data.child("amountDisposedByInsulin").getValue().toString().trim()
+                            correctionFactorDB=data.child("correctionFactor").getValue().toString().trim()
+                            insulinRecommendationDB=data.child("insulinRecommendation").getValue().toString().trim()
+                            typeOfInsulinDB=data.child("typeOfBG").getValue().toString().trim()
+                            var mBGRecyclerView: BGRecyclerView= BGRecyclerView(eventDB,currentBGDB,targetBGDB,amountOfCHODB,disposedCHODB,correctionFactorDB,insulinRecommendationDB,typeOfInsulinDB)
                             mBGList.add(mBGRecyclerView)
                         }
                     }
@@ -152,7 +160,7 @@ class MyCalendar : AppCompatActivity() {
                 mBGList.clear()
             }
 
-            rootRef.addValueEventListener(object : ValueEventListener {
+            rootRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     // This method is called once with the initial value and again
                     // whenever data at this location is updated.
@@ -165,11 +173,15 @@ class MyCalendar : AppCompatActivity() {
                             var dateDB=data.child("calendarTime").getValue().toString().trim()
                             if(dateDB.equals(clickedDate))
                             {
-                                bgDB=data.child("bglevel").getValue().toString().trim()
-                                foodDB=data.child("foodIntake").getValue().toString().trim()
-                                insulinDB=data.child("insulinLevel").getValue().toString().trim()
-                                eventDB=data.child("recentEvent").getValue().toString().trim()
-                                var mBGRecyclerView: BGRecyclerView= BGRecyclerView(foodDB,eventDB,bgDB,insulinDB)
+                                eventDB=data.child("beforeEvent").getValue().toString().trim()
+                                currentBGDB=data.child("currentBGLevel").getValue().toString().trim()
+                                targetBGDB=data.child("targetBGLevel").getValue().toString().trim()
+                                amountOfCHODB=data.child("totalCHO").getValue().toString().trim()
+                                disposedCHODB=data.child("amountDisposedByInsulin").getValue().toString().trim()
+                                correctionFactorDB=data.child("correctionFactor").getValue().toString().trim()
+                                insulinRecommendationDB=data.child("insulinRecommendation").getValue().toString().trim()
+                                typeOfInsulinDB=data.child("typeOfBG").getValue().toString().trim()
+                                var mBGRecyclerView: BGRecyclerView= BGRecyclerView(eventDB,currentBGDB,targetBGDB,amountOfCHODB,disposedCHODB,correctionFactorDB,insulinRecommendationDB,typeOfInsulinDB)
                                 mBGList.add(mBGRecyclerView)
                             }
                         }

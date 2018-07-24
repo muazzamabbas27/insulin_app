@@ -2,6 +2,8 @@ package com.ciklum.insulinapp.Activities.UserProfile
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.ciklum.insulinapp.R
 import com.google.firebase.auth.FirebaseAuth
@@ -25,6 +27,8 @@ class UserProfileActivity : AppCompatActivity() {
 
     private lateinit var currentUserEmailID:String
 
+    private lateinit var progressBar3:ProgressBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
@@ -35,8 +39,10 @@ class UserProfileActivity : AppCompatActivity() {
         genderTextView=findViewById(R.id.genderTextView)
         weightTextView=findViewById(R.id.weightTextView)
         heightTextView=findViewById(R.id.heightTextView)
+        progressBar3=findViewById(R.id.progressBar3)
 
 
+        progressBar3.setVisibility(View.VISIBLE)
         mAuth=FirebaseAuth.getInstance()
         mFirebaseUser=mAuth?.currentUser
         currentUserEmailID= mFirebaseUser?.email!!
@@ -71,6 +77,7 @@ class UserProfileActivity : AppCompatActivity() {
                         genderTextView.setText(userGender)
                         weightTextView.setText(userWeight)
                         heightTextView.setText(userHeight)
+                        progressBar3.setVisibility(View.INVISIBLE)
                     }
                 }
             }

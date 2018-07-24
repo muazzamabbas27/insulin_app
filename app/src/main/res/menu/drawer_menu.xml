@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/viewProfileDrawerBtn" android:title="@string/viewProfileBtnText" android:icon="@drawable/ic_profile_icon"/>
+    <item android:id="@+id/editProfileDrawerBtn" android:title="@string/editProfileBtnText" android:icon="@drawable/ic_edit_profile_icon"/>
+    <item android:id="@+id/logBolusBGDrawerBtn" android:title="@string/logBolusBGBtnText" android:icon="@drawable/ic_bolus_icon"/>
+    <item android:id="@+id/logBasalBGDrawerBtn" android:title="@string/logBasalBGBtnText" android:icon="@drawable/ic_basal_icon"/>
+    <item android:id="@+id/calendarDrawerBtn" android:title="@string/calendarBtnDashboardText" android:icon="@drawable/ic_calendar_icon"/>
+    <item android:id="@+id/medicineReminderDrawerBtn" android:title="@string/medicineReminderBtnText" android:icon="@drawable/ic_medicine_icon"/>
+    <item android:id="@+id/healthArticlesDrawerBtn" android:title="@string/healthArticlesBtnText" android:icon="@drawable/ic_newspaper_icon"/>
+    <item android:id="@+id/doctorInfoDrawerBtn" android:title="@string/doctorBtnText" android:icon="@drawable/ic_doctor_icon"/>
+    <item android:id="@+id/disclaimerDrawerBtn" android:title="@string/disclaimerBtnText" android:icon="@drawable/ic_info_icon"/>
+</menu>

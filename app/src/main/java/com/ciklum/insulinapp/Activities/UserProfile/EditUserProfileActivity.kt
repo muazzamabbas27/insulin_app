@@ -36,6 +36,8 @@ class EditUserProfileActivity : AppCompatActivity() {
     private lateinit var mName:String
     private var mGender:String=""
 
+    var progressBar2: ProgressBar?=null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +48,9 @@ class EditUserProfileActivity : AppCompatActivity() {
         weightEditText=findViewById(R.id.weightEditText)
         heightEditText=findViewById(R.id.heightEditText)
         saveEditsBtn=findViewById(R.id.saveEditsBtn)
+        progressBar2=findViewById(R.id.progressBar2)
+
+        progressBar2?.setVisibility(View.VISIBLE)
 
         val adapter = ArrayAdapter.createFromResource(this, R.array.age_array, android.R.layout.simple_spinner_item)
 
@@ -97,6 +102,7 @@ class EditUserProfileActivity : AppCompatActivity() {
                         nameEditText.setText(mName)
                         weightEditText.setText(userWeight)
                         heightEditText.setText(userHeight)
+                        progressBar2?.setVisibility(View.INVISIBLE)
                     }
                 }
             }

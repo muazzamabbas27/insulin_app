@@ -126,15 +126,17 @@
 
     <!--Dashboard page text-->
     <string name="dashboardPageTitle">DASHBOARD</string>
-    <string name="logBolusBGBtnText">Log bolus blood glucose level</string>
-    <string name="healthArticlesBtnText">View Health Articles</string>
-    <string name="calendarBtnDashboardText">Check Calendar</string>
-    <string name="disclaimerBtnText">View Disclaimer</string>
-    <string name="doctorBtnText">View Doctor Info</string>
+
+    <!--Drawer Layout text -->
     <string name="viewProfileBtnText">View Profile</string>
     <string name="editProfileBtnText">Edit Profile</string>
-    <string name="medicineReminderBtnText">Set Medicine Reminder</string>
-    <string name="logBasalBGBtnText">Log basal blood glucose level</string>
+    <string name="logBolusBGBtnText">Log Bolus Blood Level</string>
+    <string name="logBasalBGBtnText">Log Basal Blood Level</string>
+    <string name="calendarBtnDashboardText">Calendar</string>
+    <string name="medicineReminderBtnText">Medicine Reminder</string>
+    <string name="healthArticlesBtnText">Health Articles</string>
+    <string name="doctorBtnText">Contact Doctor</string>
+    <string name="disclaimerBtnText">Disclaimer</string>
 
     <!--Menu page text-->
     <string name="menuPageLogoutTitle">Logout</string>
@@ -214,15 +216,26 @@
 
     <!--BG Level RecyclerView text-->
     <string name="eventTitleText">Event:</string>
-    <string name="foodTitleText">Food Intake:</string>
-    <string name="bgTitleText">Blood Glucose Level:</string>
-    <string name="insulinTitleText">Insulin Recommended:</string>
-
+    <string name="initialBGTitleText">Initial Blood Glucose Level (mg/dl):</string>
+    <string name="targetBGTitleText">Target Blood Glucose Level (mg/dl):</string>
+    <string name="amountOfCHOTitleText">Amount of CHO in meal (g):</string>
+    <string name="disposedCHOTitleText">Amount of CHO disposed by 1 unit of Insulin (g):</string>
+    <string name="correctionFactorTitleText">Correction Factor:</string>
+    <string name="insulinRecommendationTitleText">Recommended Insulin (units):</string>
+    <string name="insulinTypeTitleTextView">Insulin Type:</string>
+    
     <string name="eventText">-</string>
-    <string name="foodText">-</string>
-    <string name="bgText">-</string>
-    <string name="insulinText">-</string>
+    <string name="initialBGText">-</string>
+    <string name="targetBGText">-</string>
+    <string name="amountOfCHOText">-</string>
+    <string name="disposedCHOText">-</string>
+    <string name="correctionFactor2Text">-</string>
+    <string name="insulinRecommendationText">-</string>
+    <string name="insulinTypeTextView">-</string>
 
+    <!--DrawerLayout toggle-->
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
 
 </resources>

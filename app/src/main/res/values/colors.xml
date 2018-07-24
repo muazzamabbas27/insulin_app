@@ -9,4 +9,6 @@
     <color name="myWhite">#FFF</color>
     <color name="myGreen">#008000</color>
     <color name="myRed">#FF0000</color>
+    <color name="myCalendarGreen">#98FB98</color>
+    <color name="myCalendarYellow">#FFFF99</color>
 </resources>

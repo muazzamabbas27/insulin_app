@@ -3,6 +3,9 @@ package com.ciklum.insulinapp.Activities.Dashboard
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
 import com.ciklum.insulinapp.Activities.Menu.MenuActivity
@@ -22,84 +25,95 @@ import com.ciklum.insulinapp.Activities.UserProfile.UserProfileActivity
 
 class DashboardActivity : AppCompatActivity() {
 
-    private var calendarBtn: Button?=null
-    private var logBolusBGLevelBtn:Button?=null
-    private var healthArticlesBtn:Button?=null
-    private var viewDisclaimerBtn:Button?=null
-    private var viewDoctorInfoBtn:Button?=null
-    private var viewProfileBtn:Button?=null
-    private var editProfileBtn:Button?=null
-    private var medicineReminderBtn:Button?=null
-    private var logBasalBGLevelBtn:Button?=null
+    private lateinit var mDrawerLayout:DrawerLayout
+    private lateinit var mToggle:ActionBarDrawerToggle
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
-        calendarBtn=findViewById(R.id.calendarBtn)
-        logBolusBGLevelBtn=findViewById(R.id.logBolusBGLevelBtn)
-        healthArticlesBtn=findViewById(R.id.healthArticlesBtn)
-        viewDisclaimerBtn=findViewById(R.id.viewDisclaimerBtn)
-        viewDoctorInfoBtn=findViewById(R.id.viewDoctorInfoBtn)
-        viewProfileBtn=findViewById(R.id.viewProfileBtn)
-        editProfileBtn=findViewById(R.id.editProfileBtn)
-        medicineReminderBtn=findViewById(R.id.medicineReminderBtn)
-        logBasalBGLevelBtn=findViewById(R.id.logBasalBGLevelBtn)
+        mDrawerLayout=findViewById(R.id.mDrawerLayout)
+        mToggle= ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close)
+        mDrawerLayout.addDrawerListener(mToggle)
+        mToggle.syncState()
+        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true)
 
+        var navigationView: NavigationView = findViewById(R.id.nav_view)
+        navigationView.bringToFront()
 
-        calendarBtn?.setOnClickListener()
-        {
-            val i:Intent=Intent(this, MyCalendar::class.java)
-            startActivity(i)
-        }
+        navigationView.setNavigationItemSelectedListener {menuItem ->
+            // set item as selected to persist highlight
+            //menuItem.isChecked = true
+            // close drawer when item is tapped
+            //mDrawerLayout.closeDrawers()
 
-        logBolusBGLevelBtn?.setOnClickListener()
-        {
-            val i:Intent=Intent(this,LogBolusBGActivity::class.java)
-            startActivity(i)
-        }
+            var id:Int=menuItem.itemId
 
-        healthArticlesBtn?.setOnClickListener()
-        {
-            val i:Intent=Intent(this,HealthArticlesActivity::class.java)
-            startActivity(i)
-        }
+            if(id==R.id.viewProfileDrawerBtn)
+            {
+                mDrawerLayout.closeDrawers()
+                val i:Intent=Intent(applicationContext,UserProfileActivity::class.java)
+                startActivity(i)
+            }
 
-        viewDisclaimerBtn?.setOnClickListener()
-        {
-            val i:Intent=Intent(this,DisclaimerActivity::class.java)
-            startActivity(i)
-        }
+            if(id==R.id.editProfileDrawerBtn)
+            {
+                mDrawerLayout.closeDrawers()
+                val i:Intent=Intent(applicationContext,EditUserProfileActivity::class.java)
+                startActivity(i)
+            }
 
-        viewDoctorInfoBtn?.setOnClickListener()
-        {
-            val i=Intent(this,DoctorActivity::class.java)
-            startActivity(i)
-        }
+            if(id==R.id.logBolusBGDrawerBtn)
+            {
+                mDrawerLayout.closeDrawers()
+                val i:Intent=Intent(applicationContext,LogBolusBGActivity::class.java)
+                startActivity(i)
+            }
 
-        viewProfileBtn?.setOnClickListener()
-        {
-            val i=Intent(this,UserProfileActivity::class.java)
-            startActivity(i)
-        }
+            if(id==R.id.logBasalBGDrawerBtn)
+            {
+                mDrawerLayout.closeDrawers()
+                val i:Intent=Intent(applicationContext,LogBasalBGActivity::class.java)
+                startActivity(i)
+            }
 
-        editProfileBtn?.setOnClickListener()
-        {
-            val i=Intent(this,EditUserProfileActivity::class.java)
-            startActivity(i)
-        }
+            if(id==R.id.calendarDrawerBtn)
+            {
+                mDrawerLayout.closeDrawers()
+                val i:Intent=Intent(applicationContext,MyCalendar::class.java)
+                startActivity(i)
+            }
 
-        medicineReminderBtn?.setOnClickListener()
-        {
-            val i=Intent(this,ReminderActivity::class.java)
-            startActivity(i)
-        }
+            if(id==R.id.medicineReminderDrawerBtn)
+            {
+                mDrawerLayout.closeDrawers()
+                val i:Intent=Intent(applicationContext,ReminderActivity::class.java)
+                startActivity(i)
+            }
 
-        logBasalBGLevelBtn?.setOnClickListener()
-        {
-            val i=Intent(this,LogBasalBGActivity::class.java)
-            startActivity(i)
+            if(id==R.id.healthArticlesDrawerBtn)
+            {
+                mDrawerLayout.closeDrawers()
+                val i:Intent=Intent(applicationContext,HealthArticlesActivity::class.java)
+                startActivity(i)
+            }
+
+            if(id==R.id.doctorInfoDrawerBtn)
+            {
+                mDrawerLayout.closeDrawers()
+                val i:Intent=Intent(applicationContext,DoctorActivity::class.java)
+                startActivity(i)
+            }
+
+            if(id==R.id.disclaimerDrawerBtn)
+            {
+                mDrawerLayout.closeDrawers()
+                val i:Intent=Intent(applicationContext,DisclaimerActivity::class.java)
+                startActivity(i)
+            }
+
+            true
         }
     }
 
@@ -112,6 +126,12 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
+
+        if(mToggle.onOptionsItemSelected(item))
+        {
+            return true
+        }
+
         when (item.itemId) {
             R.id.logoutMenuBtn -> {
                 mAuth?.signOut()
