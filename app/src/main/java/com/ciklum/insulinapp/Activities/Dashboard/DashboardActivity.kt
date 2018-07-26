@@ -13,6 +13,7 @@ import com.ciklum.insulinapp.Activities.SplashScreen.mAuth
 import com.ciklum.insulinapp.R
 import android.widget.Button
 import com.ciklum.insulinapp.Activities.Calendar.MyCalendar
+import com.ciklum.insulinapp.Activities.DetailedReports.DetailedReportsActivity
 import com.ciklum.insulinapp.Activities.Disclaimer.DisclaimerActivity
 import com.ciklum.insulinapp.Activities.Doctors.DoctorActivity
 import com.ciklum.insulinapp.Activities.HealthArticles.HealthArticlesActivity
@@ -42,6 +43,11 @@ class DashboardActivity : AppCompatActivity() {
         var navigationView: NavigationView = findViewById(R.id.nav_view)
         navigationView.bringToFront()
 
+        if(mDrawerLayout.isDrawerOpen(navigationView))
+        {
+            mDrawerLayout.closeDrawer(navigationView)
+        }
+
         navigationView.setNavigationItemSelectedListener {menuItem ->
             // set item as selected to persist highlight
             //menuItem.isChecked = true
@@ -52,64 +58,70 @@ class DashboardActivity : AppCompatActivity() {
 
             if(id==R.id.viewProfileDrawerBtn)
             {
-                mDrawerLayout.closeDrawers()
+                //mDrawerLayout.closeDrawers()
                 val i:Intent=Intent(applicationContext,UserProfileActivity::class.java)
                 startActivity(i)
             }
 
             if(id==R.id.editProfileDrawerBtn)
             {
-                mDrawerLayout.closeDrawers()
+                //mDrawerLayout.closeDrawers()
                 val i:Intent=Intent(applicationContext,EditUserProfileActivity::class.java)
                 startActivity(i)
             }
 
             if(id==R.id.logBolusBGDrawerBtn)
             {
-                mDrawerLayout.closeDrawers()
+                //mDrawerLayout.closeDrawers()
                 val i:Intent=Intent(applicationContext,LogBolusBGActivity::class.java)
                 startActivity(i)
             }
 
             if(id==R.id.logBasalBGDrawerBtn)
             {
-                mDrawerLayout.closeDrawers()
+                //mDrawerLayout.closeDrawers()
                 val i:Intent=Intent(applicationContext,LogBasalBGActivity::class.java)
                 startActivity(i)
             }
 
             if(id==R.id.calendarDrawerBtn)
             {
-                mDrawerLayout.closeDrawers()
+                //mDrawerLayout.closeDrawers()
                 val i:Intent=Intent(applicationContext,MyCalendar::class.java)
                 startActivity(i)
             }
 
             if(id==R.id.medicineReminderDrawerBtn)
             {
-                mDrawerLayout.closeDrawers()
+                //mDrawerLayout.closeDrawers()
                 val i:Intent=Intent(applicationContext,ReminderActivity::class.java)
                 startActivity(i)
             }
 
             if(id==R.id.healthArticlesDrawerBtn)
             {
-                mDrawerLayout.closeDrawers()
+                //mDrawerLayout.closeDrawers()
                 val i:Intent=Intent(applicationContext,HealthArticlesActivity::class.java)
                 startActivity(i)
             }
 
             if(id==R.id.doctorInfoDrawerBtn)
             {
-                mDrawerLayout.closeDrawers()
+                //mDrawerLayout.closeDrawers()
                 val i:Intent=Intent(applicationContext,DoctorActivity::class.java)
                 startActivity(i)
             }
 
             if(id==R.id.disclaimerDrawerBtn)
             {
-                mDrawerLayout.closeDrawers()
+                //mDrawerLayout.closeDrawers()
                 val i:Intent=Intent(applicationContext,DisclaimerActivity::class.java)
+                startActivity(i)
+            }
+
+            if(id==R.id.detailedReportsDrawerBtn)
+            {
+                val i:Intent=Intent(applicationContext,DetailedReportsActivity::class.java)
                 startActivity(i)
             }
 

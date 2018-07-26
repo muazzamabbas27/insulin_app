@@ -47,7 +47,8 @@
             android:name=".Models.RingtoneService"
             android:enabled="true" />
 
-        <activity android:name=".Activities.LogBG.LogBasalBGActivity"></activity>
+        <activity android:name=".Activities.LogBG.LogBasalBGActivity" />
+        <activity android:name=".Activities.DetailedReports.DetailedReportsActivity"></activity>
     </application>
 
 </manifest>

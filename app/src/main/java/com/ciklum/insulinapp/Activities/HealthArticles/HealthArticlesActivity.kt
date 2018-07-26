@@ -14,9 +14,6 @@ import android.app.Activity
 import com.ciklum.insulinapp.R.id.webView
 import com.ciklum.insulinapp.R.id.webView
 
-
-
-
 class HealthArticlesActivity : AppCompatActivity() {
 
     private var webView:WebView?=null

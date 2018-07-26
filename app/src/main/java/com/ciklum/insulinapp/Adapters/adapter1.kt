@@ -6,12 +6,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.View
-import com.ciklum.insulinapp.Models.BGRecyclerView
+import com.ciklum.insulinapp.Models.BolusBGRecyclerView
 import com.ciklum.insulinapp.R
-import org.w3c.dom.Text
 
 
-class adapter1(private val data: ArrayList<BGRecyclerView>) : RecyclerView.Adapter<adapter1.adapter1ViewHolder>() {
+class adapter1(private val data: ArrayList<BolusBGRecyclerView>) : RecyclerView.Adapter<adapter1.adapter1ViewHolder>() {
 
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): adapter1ViewHolder {
@@ -59,7 +58,7 @@ class adapter1(private val data: ArrayList<BGRecyclerView>) : RecyclerView.Adapt
             disposedCHOTextView=itemView.findViewById(R.id.disposedCHOTextView)
             correctionFactorTextView=itemView.findViewById(R.id.correctionFactorTextView)
             insulinRecommendedTextView=itemView.findViewById(R.id.insulinRecommendedTextView)
-            insulinTypeTextView=itemView.findViewById(R.id.insulinTypeTextView)
+            insulinTypeTextView=itemView.findViewById(R.id.insulinTypeTitleTextView)
         }
     }
 

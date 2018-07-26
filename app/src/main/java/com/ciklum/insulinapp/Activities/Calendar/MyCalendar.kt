@@ -3,24 +3,24 @@ package com.ciklum.insulinapp.Activities.Calendar
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.NonNull
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.Toast
 import com.ciklum.insulinapp.Activities.Notes.NotesActivity
-import com.ciklum.insulinapp.Models.BGRecyclerView
+import com.ciklum.insulinapp.Models.BolusBGRecyclerView
 import com.ciklum.insulinapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_my_calendar.*
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.TextView
 import com.ciklum.insulinapp.Adapters.adapter1
-import java.nio.file.Files.size
+import com.ciklum.insulinapp.Adapters.adapter2
+import com.ciklum.insulinapp.Models.BasalBGRecyclerView
 import kotlin.collections.ArrayList
 
 
@@ -45,6 +45,7 @@ class MyCalendar : AppCompatActivity() {
     private lateinit var mFirebaseUser:FirebaseUser
 
     private lateinit var rootRef: DatabaseReference
+    private lateinit var rootRef10:DatabaseReference
 
     private lateinit var currentUserEmailID:String
 
@@ -59,14 +60,24 @@ class MyCalendar : AppCompatActivity() {
     private lateinit var insulinRecommendationDB:String
     private lateinit var typeOfInsulinDB:String
 
+    private lateinit var basalWeightDB:String
+    private lateinit var basalTDIDB:String
+    private lateinit var basalInsulinRecommendationDB:String
+
     private lateinit var RV1: RecyclerView
-    var mBGList: ArrayList<BGRecyclerView> = ArrayList(1000)
+    private lateinit var RV3:RecyclerView
+    var mBolusBGList: ArrayList<BolusBGRecyclerView> = ArrayList(1000)
+    var mBasalBGList:ArrayList<BasalBGRecyclerView> = ArrayList(1000)
     var datesList:ArrayList<String> = ArrayList(1000)
+    var datesList2:ArrayList<String> = ArrayList(1000)
 
 
     private var someMonth:Int=-1
     private lateinit var monthString: String
     private lateinit var clickedDate:String
+
+    private lateinit var bolusTitleTextView: TextView
+    private lateinit var basalTitleTextview: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +87,7 @@ class MyCalendar : AppCompatActivity() {
         mFirebaseDatabase = FirebaseDatabase.getInstance()
         mFirebaseDatabaseReference = mFirebaseDatabase?.getReference("Bolus BG Data")
         rootRef=FirebaseDatabase.getInstance().getReference("Bolus BG Data")
+        rootRef10=FirebaseDatabase.getInstance().getReference("Basal BG Data")
 
         mFirebaseUser= mAuth.currentUser!!
 
@@ -84,15 +96,28 @@ class MyCalendar : AppCompatActivity() {
         mCalendarView=findViewById(R.id.calendarView)
         makeNotesBtn=findViewById(R.id.makeNotesBtn)
         RV1=findViewById(R.id.RV1)
+        RV3=findViewById(R.id.RV3)
 
-        getCurrentCalendarDate();
+        getCurrentCalendarDate()
+
+        bolusTitleTextView=findViewById(R.id.bolusTitleTextView)
+        basalTitleTextview=findViewById(R.id.basalTitleTextView)
+
+        bolusTitleTextView.setText("")
+        basalTitleTextview.setText("")
 
         Toast.makeText(applicationContext,"Loading Blood Glucose data",Toast.LENGTH_SHORT).show()
 
-        if (mBGList.size > 0)
+        if (mBolusBGList.size > 0)
         {
             RV1.removeAllViews()
-            mBGList.clear()
+            mBolusBGList.clear()
+        }
+
+        if(mBasalBGList.size>0)
+        {
+            RV3.removeAllViews()
+            mBasalBGList.clear()
         }
 
         rootRef.addValueEventListener(object : ValueEventListener {
@@ -117,20 +142,21 @@ class MyCalendar : AppCompatActivity() {
                             correctionFactorDB=data.child("correctionFactor").getValue().toString().trim()
                             insulinRecommendationDB=data.child("insulinRecommendation").getValue().toString().trim()
                             typeOfInsulinDB=data.child("typeOfBG").getValue().toString().trim()
-                            var mBGRecyclerView: BGRecyclerView= BGRecyclerView(eventDB,currentBGDB,targetBGDB,amountOfCHODB,disposedCHODB,correctionFactorDB,insulinRecommendationDB,typeOfInsulinDB)
-                            mBGList.add(mBGRecyclerView)
+                            var mBGRecyclerView: BolusBGRecyclerView= BolusBGRecyclerView(eventDB,currentBGDB,targetBGDB,amountOfCHODB,disposedCHODB,correctionFactorDB,insulinRecommendationDB,typeOfInsulinDB)
+                            mBolusBGList.add(mBGRecyclerView)
                         }
                     }
                 }
 
-                if (mBGList.size > 0) {
+                if (mBolusBGList.size > 0) {
+                    bolusTitleTextView.setText("Bolus Insulin")
                     RV1.setLayoutManager(LinearLayoutManager(applicationContext))
-                    RV1.setAdapter(adapter1(mBGList))
-                    Toast.makeText(applicationContext,"Data loaded, contains " + mBGList.size.toString() + " items", Toast.LENGTH_SHORT).show()
+                    RV1.setAdapter(adapter1(mBolusBGList))
+                    //Toast.makeText(applicationContext,"Data loaded, contains " + mBolusBGList.size.toString() + " items", Toast.LENGTH_SHORT).show()
                 }
                 else
                 {
-                    Toast.makeText(applicationContext,"No Blood Glucose data saved for this day",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext,"No Bolus Blood Glucose data saved for this day",Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -138,6 +164,50 @@ class MyCalendar : AppCompatActivity() {
                 Toast.makeText(applicationContext,"Could not read from database, please check your internet connection",Toast.LENGTH_LONG).show()
             }
         })
+
+
+        rootRef10.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                for (data: DataSnapshot in dataSnapshot.getChildren())
+                {
+                    var emailIDDB=data.child("emailID").getValue().toString().trim()
+
+                    if(emailIDDB.equals(currentUserEmailID))
+                    {
+                        var dateDB=data.child("calendarTime").getValue().toString().trim()
+                        datesList2.add(dateDB)
+                        if(dateDB.equals(currentCompleteDate))
+                        {
+                            basalWeightDB=data.child("mweight").getValue().toString().trim()
+                            basalTDIDB=data.child("mtdi").getValue().toString().trim()
+                            basalInsulinRecommendationDB=data.child("insulinRecommendation").getValue().toString().trim()
+                            typeOfInsulinDB=data.child("typeOfBG").getValue().toString().trim()
+
+                            var mBasalBGRecyclerView: BasalBGRecyclerView= BasalBGRecyclerView(basalWeightDB,basalTDIDB,basalInsulinRecommendationDB,typeOfInsulinDB)
+                            mBasalBGList.add(mBasalBGRecyclerView)
+                        }
+                    }
+                }
+
+                if (mBasalBGList.size > 0) {
+                    basalTitleTextview.setText("Basal Insulin")
+                    RV3.setLayoutManager(LinearLayoutManager(applicationContext))
+                    RV3.setAdapter(adapter2(mBasalBGList))
+                    //Toast.makeText(applicationContext,"Data loaded, contains " + mBasalBGList.size.toString() + " items", Toast.LENGTH_SHORT).show()
+                }
+                else
+                {
+                    Toast.makeText(applicationContext,"No Basal Blood Glucose data saved for this day",Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(applicationContext,"Could not read from database, please check your internet connection",Toast.LENGTH_LONG).show()
+            }
+        })
+
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             //Months are indexed from 0. So, 0 means january, 1 means February, 2 means march etc.
@@ -150,14 +220,23 @@ class MyCalendar : AppCompatActivity() {
 
             isDateChanged=true
 
+            bolusTitleTextView.setText("")
+            basalTitleTextview.setText("")
+
             convertMonthNumbertoWord()
             clickedDate=myDate+"-"+monthString+"-"+myYear
 
             Toast.makeText(applicationContext,"Loading Blood Glucose data",Toast.LENGTH_SHORT).show()
 
-            if (mBGList.size > 0) {
+            if (mBolusBGList.size > 0) {
                 RV1.removeAllViews()
-                mBGList.clear()
+                mBolusBGList.clear()
+            }
+
+            if(mBasalBGList.size>0)
+            {
+                RV3.removeAllViews()
+                mBasalBGList.clear()
             }
 
             rootRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -181,20 +260,63 @@ class MyCalendar : AppCompatActivity() {
                                 correctionFactorDB=data.child("correctionFactor").getValue().toString().trim()
                                 insulinRecommendationDB=data.child("insulinRecommendation").getValue().toString().trim()
                                 typeOfInsulinDB=data.child("typeOfBG").getValue().toString().trim()
-                                var mBGRecyclerView: BGRecyclerView= BGRecyclerView(eventDB,currentBGDB,targetBGDB,amountOfCHODB,disposedCHODB,correctionFactorDB,insulinRecommendationDB,typeOfInsulinDB)
-                                mBGList.add(mBGRecyclerView)
+                                var mBGRecyclerView: BolusBGRecyclerView= BolusBGRecyclerView(eventDB,currentBGDB,targetBGDB,amountOfCHODB,disposedCHODB,correctionFactorDB,insulinRecommendationDB,typeOfInsulinDB)
+                                mBolusBGList.add(mBGRecyclerView)
                             }
                         }
                     }
 
-                    if (mBGList.size > 0) {
+                    if (mBolusBGList.size > 0) {
+                        bolusTitleTextView.setText("Bolus Insulin")
                         RV1.setLayoutManager(LinearLayoutManager(applicationContext))
-                        RV1.setAdapter(adapter1(mBGList))
-                        Toast.makeText(applicationContext,"Data loaded, contains " + mBGList.size.toString() + " items", Toast.LENGTH_SHORT).show()
+                        RV1.setAdapter(adapter1(mBolusBGList))
+                        Toast.makeText(applicationContext,"Data loaded, contains " + mBolusBGList.size.toString() + " items", Toast.LENGTH_SHORT).show()
                     }
                     else
                     {
-                        Toast.makeText(applicationContext,"No Blood Glucose data saved for this day",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext,"No Bolus Blood Glucose data saved for this day",Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(applicationContext,"Could not read from database, please check your internet connection",Toast.LENGTH_LONG).show()
+                }
+            })
+
+            rootRef10.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+                    for (data: DataSnapshot in dataSnapshot.getChildren())
+                    {
+                        var emailIDDB=data.child("emailID").getValue().toString().trim()
+
+                        if(emailIDDB.equals(currentUserEmailID))
+                        {
+                            var dateDB=data.child("calendarTime").getValue().toString().trim()
+                            datesList2.add(dateDB)
+                            if(dateDB.equals(clickedDate))
+                            {
+                                basalWeightDB=data.child("mweight").getValue().toString().trim()
+                                basalTDIDB=data.child("mtdi").getValue().toString().trim()
+                                basalInsulinRecommendationDB=data.child("insulinRecommendation").getValue().toString().trim()
+                                typeOfInsulinDB=data.child("typeOfBG").getValue().toString().trim()
+
+                                var mBasalBGRecyclerView: BasalBGRecyclerView= BasalBGRecyclerView(basalWeightDB,basalTDIDB,basalInsulinRecommendationDB,typeOfInsulinDB)
+                                mBasalBGList.add(mBasalBGRecyclerView)
+                            }
+                        }
+                    }
+
+                    if (mBasalBGList.size > 0) {
+                        basalTitleTextview.setText("Basal Insulin")
+                        RV3.setLayoutManager(LinearLayoutManager(applicationContext))
+                        RV3.setAdapter(adapter2(mBasalBGList))
+                        //Toast.makeText(applicationContext,"Data loaded, contains " + mBasalBGList.size.toString() + " items", Toast.LENGTH_SHORT).show()
+                    }
+                    else
+                    {
+                        Toast.makeText(applicationContext,"No Basal Blood Glucose data saved for this day",Toast.LENGTH_SHORT).show()
                     }
                 }
 

@@ -1,6 +1,6 @@
 package com.ciklum.insulinapp.Models
 
-class BGRecyclerView constructor(beforeEvent:String,initialBG:String,targetBG:String,amountOfCHO:String,disposedCHO:String,correctionFactor:String,insulinRecommendation:String,insulinType:String)
+class BolusBGRecyclerView constructor(beforeEvent:String, initialBG:String, targetBG:String, amountOfCHO:String, disposedCHO:String, correctionFactor:String, insulinRecommendation:String, insulinType:String)
 {
     var beforeEvent:String=beforeEvent
     var initialBG:String=initialBG

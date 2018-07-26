@@ -73,15 +73,15 @@ class LogBolusBGActivity : AppCompatActivity() {
         radioGroup2.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radioGroup, i ->
             if(i==R.id.radioBreakfast)
             {
-                mEvent="Before Breakfast"
+                mEvent="Breakfast"
             }
             if(i==R.id.radioLunch)
             {
-                mEvent="Before Lunch"
+                mEvent="Lunch"
             }
             if(i==R.id.radioDinner)
             {
-                mEvent="Before Dinner"
+                mEvent="Dinner"
             }
         })
 

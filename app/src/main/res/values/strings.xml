@@ -137,6 +137,7 @@
     <string name="healthArticlesBtnText">Health Articles</string>
     <string name="doctorBtnText">Contact Doctor</string>
     <string name="disclaimerBtnText">Disclaimer</string>
+    <string name="detailedReportsBtnText">Detailed Reports</string>
 
     <!--Menu page text-->
     <string name="menuPageLogoutTitle">Logout</string>
@@ -214,7 +215,7 @@
     <string name="stopAlarm">Stop Alarm</string>
 
 
-    <!--BG Level RecyclerView text-->
+    <!--BG Level Bolus RecyclerView text-->
     <string name="eventTitleText">Event:</string>
     <string name="initialBGTitleText">Initial Blood Glucose Level (mg/dl):</string>
     <string name="targetBGTitleText">Target Blood Glucose Level (mg/dl):</string>
@@ -223,7 +224,7 @@
     <string name="correctionFactorTitleText">Correction Factor:</string>
     <string name="insulinRecommendationTitleText">Recommended Insulin (units):</string>
     <string name="insulinTypeTitleTextView">Insulin Type:</string>
-    
+
     <string name="eventText">-</string>
     <string name="initialBGText">-</string>
     <string name="targetBGText">-</string>
@@ -237,5 +238,20 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
 
+    <!--Detailed Reports Page Text-->
+    <string name="detailedReportsTitleText">Detailed Reports</string>
+    <string name="bloodGlucoseLevelsSubTitleText">Blood Glucose Levels (Bolus)</string>
+
+
+    <!--BG Level Basal RecyclerView text-->
+    <string name="basalWeightTitleText">Weight (kg):</string>
+    <string name="basalTDITitleText">Total Daily Insulin (units):</string>
+    <string name="basalInsulinRecommendedTitleText">Recommended Insulin (units):</string>
+    <string name="basalInsulinTypeTitleText">Insulin Type:</string>
+
+    <string name="basalWeightText">-</string>
+    <string name="basalTDIText">-</string>
+    <string name="basalInsulinRecommendedText">-</string>
+    <string name="basalInsulinTypeText">-</string>
 
 </resources>

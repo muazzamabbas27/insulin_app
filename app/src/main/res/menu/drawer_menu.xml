@@ -10,4 +10,5 @@
     <item android:id="@+id/healthArticlesDrawerBtn" android:title="@string/healthArticlesBtnText" android:icon="@drawable/ic_newspaper_icon"/>
     <item android:id="@+id/doctorInfoDrawerBtn" android:title="@string/doctorBtnText" android:icon="@drawable/ic_doctor_icon"/>
     <item android:id="@+id/disclaimerDrawerBtn" android:title="@string/disclaimerBtnText" android:icon="@drawable/ic_info_icon"/>
+    <item android:id="@+id/detailedReportsDrawerBtn" android:title="@string/detailedReportsBtnText" android:icon="@drawable/ic_progress_report_icon"></item>
 </menu>
