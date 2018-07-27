@@ -241,6 +241,7 @@
     <!--Detailed Reports Page Text-->
     <string name="detailedReportsTitleText">Detailed Reports</string>
     <string name="bloodGlucoseLevelsSubTitleText">Blood Glucose Levels (Bolus)</string>
+    <string name="insulinRecommendationSubTitleText">Basal Insulin Recommendation</string>
 
 
     <!--BG Level Basal RecyclerView text-->

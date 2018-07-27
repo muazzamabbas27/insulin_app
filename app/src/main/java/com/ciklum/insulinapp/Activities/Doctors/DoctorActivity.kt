@@ -94,7 +94,6 @@ class DoctorActivity : AppCompatActivity() {
         {
             val i:Intent=Intent(this,AddDoctorActivity::class.java)
             startActivity(i)
-            finish()
         }
 
         doctorPhoneNumBtn.setOnClickListener()

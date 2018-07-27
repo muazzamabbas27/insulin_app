@@ -9,7 +9,6 @@ import com.ciklum.insulinapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import org.w3c.dom.Text
 
 class UserProfileActivity : AppCompatActivity() {
 
@@ -33,8 +32,8 @@ class UserProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
 
-        nameTextView=findViewById(R.id.nameTextView)
-        ageTextView=findViewById(R.id.ageTextView)
+        nameTextView=findViewById(R.id.nameDashboardTextView)
+        ageTextView=findViewById(R.id.ageDashboardTextView)
         emailIDTextView=findViewById(R.id.emailIDTextView)
         genderTextView=findViewById(R.id.genderTextView)
         weightTextView=findViewById(R.id.weightTextView)
