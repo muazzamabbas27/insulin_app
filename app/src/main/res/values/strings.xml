@@ -102,6 +102,68 @@
         <item>100</item>
     </string-array>
 
+    <!--Month names-->
+    <string name="monthJan">Jan</string>
+    <string name="monthFeb">Feb</string>
+    <string name="monthMar">Mar</string>
+    <string name="monthApr">Apr</string>
+    <string name="monthMay">May</string>
+    <string name="monthJun">Jun</string>
+    <string name="monthJul">Jul</string>
+    <string name="monthAug">Aug</string>
+    <string name="monthSep">Sep</string>
+    <string name="monthOct">Oct</string>
+    <string name="monthNov">Nov</string>
+    <string name="monthDec">Dec</string>
+
+
+    <!--Universal Strings-->
+    <string name="errorReadingDB">Error reading from database</string>
+    <string name="loadingDataDB">Loading data from database</string>
+    <string name="dataSavedDB">Data has been stored to database</string>
+    <string name="previousDataOverwrittenDB">Your previous data has been updated with the new one</string>
+    <string name="healthArticlesURL">https://www.icliniq.com/articles/health-topics/diabetes-health</string>
+    <string name="basalTypeTextLiteral">Basal Insulin</string>
+    <string name="bolusTypeTextLiteral">Bolus Insulin</string>
+
+    <!--Firebase table names-->
+    <string name="bolusBGDataTable">Bolus BG Data</string>
+    <string name="basalBGDataTable">Basal BG Data</string>
+    <string name="bolusKeysTable">Bolus BG Keys</string>
+    <string name="basalKeysTable">Basal BG Keys</string>
+    <string name="userTable">User</string>
+    <string name="doctorTable">Doctor Data</string>
+
+
+    <!--User Firebase column names-->
+    <string name="userNameColumn">mname</string>
+    <string name="userAgeColumn">mage</string>
+
+
+    <!--Bolus Firebase column names-->
+    <string name="bolusEmailColumn">emailID</string>
+    <string name="bolusCalendarTimeColumn">calendarTime</string>
+    <string name="bolusBeforeEventColumn">beforeEvent</string>
+    <string name="bolusCurrentBGLevelColumn">currentBGLevel</string>
+    <string name="bolusTargetBGLevelColumn">targetBGLevel</string>
+    <string name="bolusTotalCHOColumn">totalCHO</string>
+    <string name="bolusCHOAmountDisposedByInsulinColumn">amountDisposedByInsulin</string>
+    <string name="bolusCorrectionFactorColumn">correctionFactor</string>
+    <string name="bolusInsulinRecommendationColumn">insulinRecommendation</string>
+    <string name="bolusTypeOfBGColumn">typeOfBG</string>
+
+
+    <!--Basal Firebase column names-->
+    <string name="basalEmailColumn">emailID</string>
+    <string name="basalCalendarTimeColumn">calendarTime</string>
+    <string name="basalWeightColumn">mweight</string>
+    <string name="basalTDIColumn">mtdi</string>
+    <string name="basalInsulinRecommendationColumn">insulinRecommendation</string>
+    <string name="basalTypeOfBGColumn">typeOfBG</string>
+
+    <!--Doctor Firebase column names-->
+    <string name="doctorNameColumn">mname</string>
+    <string name="doctorPhoneColumn">phoneNum</string>
 
     <!--Registration page text -->
     <string name="registrationPageTitle">REGISTER</string>
@@ -126,6 +188,21 @@
 
     <!--Dashboard page text-->
     <string name="dashboardPageTitle">DASHBOARD</string>
+    <string name="assistantPreTextLiteral">Assistant says: Your lifetime average bolus sugar level has been </string>
+    <string name="assistantMidTextLiteral">mg/dl in the past </string>
+    <string name="assistantEndHighTextLiteral">readings. You should consume less carbohydrates. Normal pre–meal blood sugar level is 70–99mg/dl.</string>
+    <string name="assistantEndLowTextLiteral">readings. You should consume more carbohydrates. Normal pre–meal blood sugar level is 70–99mg/dl.</string>
+    <string name="assistantEndNormalTextLiteral">readings. Normal pre–meal blood sugar level is 70–99mg/dl, good work!</string>
+    <string name="noBasalDataTextLiteral">No Basal data logged yet</string>
+    <string name="noBolusDataTextLiteral">No Bolus data logged yet</string>
+    <string name="latestBasalLogTextLiteralStart">Latest Basal Log (</string>
+    <string name="latestBasalLogTextLiteralEnd">):</string>
+    <string name="latestBolusLogTextLiteralStart">Latest Basal Log (</string>
+    <string name="latestBolusLogTextLiteralEnd">):</string>
+    <string name="dashboardLowBGTextLiteral">Low Bolus Blood Sugar</string>
+    <string name="dashboardNormalBGTextLiteral">Normal Bolus Blood Sugar</string>
+    <string name="dashboardHighBGTextLiteral">High Bolus Blood Sugar</string>
+    <string name="dashboardPieChartDescriptionTextLiteral">Bolus Blood Sugar Levels</string>
 
     <!--Drawer Layout text -->
     <string name="viewProfileBtnText">View Profile</string>
@@ -145,6 +222,12 @@
 
     <!--Calendar page text-->
     <string name="calendarBtnText">Make Notes</string>
+    <string name="calendarBolusLiteral">Bolus Insulin</string>
+    <string name="calendarBasalLiteral">Basal Insulin</string>
+    <string name="calendarNoTextLiteral"> </string>
+    <string name="calendarLoadingDataToastTextLiteral">Loading Blood Glucose data</string>
+    <string name="calendarNoBGDataToastTextLiteral">No Bolus Blood Glucose data saved for this day</string>
+    <string name="calendarNoBasalBGDataToastTextLiteral">No Basal Blood Glucose data saved for this day</string>
 
     <!--Notes page text-->
     <string name="saveNotesBtnText">Save Notes</string>
@@ -159,12 +242,16 @@
     <string name="correctionFactorText">*Enter correction factor (Points of blood sugar level dropped with 1 unit of Insulin):</string>
     <string name="checkInsulinBtnText">Calculate recommended Bolus Insulin</string>
     <string name="doneBGBtnText">Done</string>
+    <string name="bolusRecommendationPreTextLiteral">You should take</string>
+    <string name="bolusRecommendationEndTextLiteral">units of Insulin</string>
 
-    <!--Log Basal BG Level pag etext-->
+    <!--Log Basal BG Level page text-->
     <string name="logBasalBGTitle">Log Basal Blood Glucose</string>
     <string name="weightLabelText">Weight (kg):</string>
     <string name="TDIText">Total Daily Basal Insulin recommendation (units):</string>
     <string name="calculateBasalBtnText">Calculate recommended Basal Insulin</string>
+    <string name="recommendationPreTextLiteral">Your basal Insulin recommendation is</string>
+    <string name="recommendationEndTextLiteral">units</string>
 
     <!--Disclaimer page text-->
     <string name="disclaimerTitleText">Disclaimer</string>
@@ -187,15 +274,27 @@
                                 \n\n
                                 0.5 \n\n * \n\n (0.55 * weight in kg)
                                 </string>
+    <string name="emailIntentTypeTextLiteral">plain/text</string>
+    <string name="emailDevIDTextLiteral">usama.jawad@gmail.com</string>
+    <string name="emailSubjectTextLiteral">About Your App</string>
+    <string name="emailStartingTextLiteral">Hello, </string>
 
     <!--Doctors page text-->
     <string name="contactDoctorTitleText">Contact Doctor</string>
     <string name="doctorName">Name of doctor:</string>
     <string name="doctorPhoneNum">Phone number of doctor:</string>
+    <string name="doctorSwitchTextLiteral">Switch doctor</string>
+    <string name="doctorNoDoctorAddedTextLiteral">You haven\'t added a doctor yet</string>
+    <string name="doctorNoNumberTextLiteral">No number to call</string>
+    <string name="doctorAddTextLiteral">Add doctor</string>
+    <string name="callIntentTextLiteral">tel:</string>
 
     <!--Modify Doctor Info page text-->
     <string name="modifyDoctorInfo">Modify Doctor Information</string>
     <string name="saveDoctorInfo">Save information of doctor</string>
+    <string name="doctorNoNameToastTextLiteral">You haven\'t entered a name for your doctor</string>
+    <string name="doctorNoNumberToastTextLiteral">You haven\'t entered your doctor\'s phone number</string>
+    <string name="doctorWrongFormatToastTextLiteral">The format of the phone number is incorrect, it should be like: 12345678910</string>
 
     <!--User Profile text-->
     <string name="userProfileTitle">User Profile</string>
@@ -242,6 +341,10 @@
     <string name="detailedReportsTitleText">Detailed Reports</string>
     <string name="bloodGlucoseLevelsSubTitleText">Blood Glucose Levels (Bolus)</string>
     <string name="insulinRecommendationSubTitleText">Basal Insulin Recommendation</string>
+    <string name="detailsNoBarChartTextLiteral">No data has been logged to the cloud yet</string>
+    <string name="detailsBarChartLabelTextLiteral">Blood Glucose Levels</string>
+    <string name="detailsLineChartLabelTextLiteral">Data Set 1</string>
+    <string name="detailsLineDataSetLabelTextLiteral">Total Daily Insulin requirement</string>
 
 
     <!--BG Level Basal RecyclerView text-->

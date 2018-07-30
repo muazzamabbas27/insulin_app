@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Dashboard.DashboardActivity">
+    tools:context=".activitiesPackage.dashboardPackage.DashboardActivity">
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -48,16 +48,15 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:textColor="@color/myRed"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:textColor="@color/myGreen"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/progressBar4" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/RV6"
+                android:id="@+id/dashboardBasalRV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
@@ -83,10 +82,10 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/RV5" />
+                app:layout_constraintTop_toBottomOf="@+id/dashboardBolusRV" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/RV5"
+                android:id="@+id/dashboardBolusRV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"

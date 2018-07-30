@@ -14,32 +14,32 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.SplashScreen.SplashActivity">
+        <activity android:name=".activitiesPackage.SplashScreen.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.Menu.MenuActivity" />
+        <activity android:name=".activitiesPackage.Menu.MenuActivity" />
         <activity
-            android:name=".Activities.Register.RegisterActivity"
+            android:name=".activitiesPackage.Register.RegisterActivity"
             android:windowSoftInputMode="stateHidden" /> <!-- Hide software keyboard, cursor will still be visible -->
-        <activity android:name=".Activities.Login.LoginActivity" />
-        <activity android:name=".Activities.Dashboard.DashboardActivity" />
-        <activity android:name=".Activities.Calendar.MyCalendar" />
-        <activity android:name=".Activities.Notes.NotesActivity" />
+        <activity android:name=".activitiesPackage.Login.LoginActivity" />
+        <activity android:name=".activitiesPackage.dashboardPackage.DashboardActivity" />
+        <activity android:name=".activitiesPackage.calendarPackage.MyCalendar" />
+        <activity android:name=".activitiesPackage.Notes.NotesActivity" />
         <activity
-            android:name=".Activities.LogBG.LogBolusBGActivity"
+            android:name=".activitiesPackage.logBGPackage.LogBolusBGActivity"
             android:windowSoftInputMode="stateHidden" /> <!-- Hide software keyboard, cursor will still be visible -->
         >
-        <activity android:name=".Activities.HealthArticles.HealthArticlesActivity" />
-        <activity android:name=".Activities.Doctors.DoctorActivity" />
-        <activity android:name=".Activities.Disclaimer.DisclaimerActivity" />
-        <activity android:name=".Activities.Doctors.AddDoctorActivity" />
-        <activity android:name=".Activities.UserProfile.UserProfileActivity" />
-        <activity android:name=".Activities.UserProfile.EditUserProfileActivity" />
-        <activity android:name=".Activities.MedicineReminder.ReminderActivity" />
+        <activity android:name=".activitiesPackage.healthArticlesPackage.HealthArticlesActivity" />
+        <activity android:name=".activitiesPackage.doctorsPackage.DoctorActivity" />
+        <activity android:name=".activitiesPackage.disclaimerPackage.DisclaimerActivity" />
+        <activity android:name=".activitiesPackage.doctorsPackage.AddDoctorActivity" />
+        <activity android:name=".activitiesPackage.UserProfile.UserProfileActivity" />
+        <activity android:name=".activitiesPackage.UserProfile.EditUserProfileActivity" />
+        <activity android:name=".activitiesPackage.MedicineReminder.ReminderActivity" />
 
         <receiver android:name=".Models.AlarmReceiver" />
 
@@ -47,8 +47,8 @@
             android:name=".Models.RingtoneService"
             android:enabled="true" />
 
-        <activity android:name=".Activities.LogBG.LogBasalBGActivity" />
-        <activity android:name=".Activities.DetailedReports.DetailedReportsActivity"></activity>
+        <activity android:name=".activitiesPackage.logBGPackage.LogBasalBGActivity" />
+        <activity android:name=".activitiesPackage.detailedReportsPackage.DetailedReportsActivity"></activity>
     </application>
 
 </manifest>

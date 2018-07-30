@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF"
-    tools:context=".Activities.Calendar.MyCalendar">
+    tools:context=".activitiesPackage.calendarPackage.MyCalendar">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/RV1" />
+                app:layout_constraintTop_toBottomOf="@+id/calendarBolusRV" />
 
             <TextView
                 android:id="@+id/bolusTitleTextView"
@@ -59,7 +59,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/RV3"
+                android:id="@+id/calendarBasalRV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
@@ -73,7 +73,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/basalTitleTextView" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/RV1"
+                android:id="@+id/calendarBolusRV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -99,12 +99,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/RV3" />
+                app:layout_constraintTop_toBottomOf="@+id/calendarBasalRV" />
 
             <CalendarView
                 android:id="@+id/calendarView"
                 android:layout_width="match_parent"
-                android:layout_height="292dp"
+                android:layout_height="320dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
