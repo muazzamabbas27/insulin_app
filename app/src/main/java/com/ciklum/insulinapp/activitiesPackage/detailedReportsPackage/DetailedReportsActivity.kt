@@ -73,6 +73,11 @@ class DetailedReportsActivity :AppCompatActivity() {
     private var pointSelected:Int=-1
     private lateinit var bgDB:String
     private var bgDBNumber:Float=0.0F
+    private lateinit var trimmedDate:String
+    private lateinit var trimmedMonth:String
+    private lateinit var trimmedYear:String
+    private lateinit var trimmedEvent:String
+    private lateinit var compactDBDate:String
 
     /*------------------------------------------Main code------------------------------------------------*/
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,10 +133,21 @@ class DetailedReportsActivity :AppCompatActivity() {
 
                     if (emailIDDB == currentUserEmailID) {
                         dateDB=data.child(resources.getString(R.string.bolusCalendarTimeColumn)).value.toString().trim() + " (" + data.child(resources.getString(R.string.bolusBeforeEventColumn)).value.toString().trim() + ")"
+                        val parsedDateList=dateDB.split("-")
+                        trimmedDate=parsedDateList[0]
+                        trimmedMonth=parsedDateList[1]
+                        val temp=parsedDateList[2].split("(")
+                        trimmedYear=temp[0]
+                        val temp2=temp[1]
+                        trimmedEvent=temp2[0].toString()
+
+                        compactDBDate=trimmedDate + "-" + trimmedMonth + "-" + trimmedYear + "(" + trimmedEvent + ")"
+
+
                         bgDB=data.child(resources.getString(R.string.bolusCurrentBGLevelColumn)).value.toString().trim()
                         bgDBNumber=bgDB.toFloat()
 
-                        dateList.add(dateDB)
+                        dateList.add(compactDBDate)
 
                         bgList.add(BarEntry(i,bgDBNumber))
                         i++

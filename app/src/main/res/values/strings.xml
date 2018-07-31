@@ -345,6 +345,13 @@
     <string name="detailsBarChartLabelTextLiteral">Blood Glucose Levels</string>
     <string name="detailsLineChartLabelTextLiteral">Data Set 1</string>
     <string name="detailsLineDataSetLabelTextLiteral">Total Daily Insulin requirement</string>
+    <string name="detailedReportsLegendText">Key:
+                                \n
+                                1-Jan-2018 (B) = 1-January-2018 (Before Breakfast)
+                                \n
+                                1-Jan-2018 (L) = 1-January-2018 (Before Lunch)
+                                \n
+                                1-Jan-2018 (D) = 1-January-2019 (Before Dinner)</string>
 
 
     <!--BG Level Basal RecyclerView text-->
