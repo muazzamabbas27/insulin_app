@@ -3,9 +3,11 @@ package com.ciklum.insulinapp.activitiesPackage.logBGPackage
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.MenuItem
 import android.widget.*
 import com.ciklum.insulinapp.Models.BolusBGLevel
 import com.ciklum.insulinapp.R
+import com.ciklum.insulinapp.Utility.InternetUtility
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -51,6 +53,7 @@ class LogBolusBGActivity : AppCompatActivity() {
     private var foundKey:String=""
     private var isKeyFound:Boolean=false
     private lateinit var finalString: String
+    private var isInternetConnected:Boolean=false
 
     /*------------------------------------------Main code------------------------------------------------*/
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,6 +70,13 @@ class LogBolusBGActivity : AppCompatActivity() {
         showInsulinTextView=findViewById(R.id.showInsulinTextView)
         checkInsulinBtn=findViewById(R.id.checkInsulinBtn)
         radioGroup2=findViewById(R.id.radioGroup2)
+        if(supportActionBar !=null)
+        {
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayShowHomeEnabled(true)
+            supportActionBar!!.title = resources.getString(R.string.basalLoggingActionBarString)
+        }
+
 
 
         /*-----------------Fetching Firebase data-------------------*/
@@ -74,22 +84,22 @@ class LogBolusBGActivity : AppCompatActivity() {
         mFirebaseUser=mAuth?.currentUser
         currentEmailID= mFirebaseUser?.email!!
         mFirebaseDatabase= FirebaseDatabase.getInstance()
-        bolusBGRootRef= mFirebaseDatabase.getReference("Bolus BG Data")
+        bolusBGRootRef= mFirebaseDatabase.getReference(resources.getString(R.string.bolusBGDataTable))
 
 
         /*-----------------Radio Group implementation-------------------*/
         radioGroup2.setOnCheckedChangeListener { _, i ->
             if(i==R.id.radioBreakfast)
             {
-                mEvent="Breakfast"
+                mEvent=resources.getString(R.string.bolusBreakfastEvent)
             }
             if(i==R.id.radioLunch)
             {
-                mEvent="Lunch"
+                mEvent=resources.getString(R.string.bolusLunchEvent)
             }
             if(i==R.id.radioDinner)
             {
-                mEvent="Dinner"
+                mEvent=resources.getString(R.string.bolusDinnerEvent)
             }
         }
 
@@ -100,14 +110,14 @@ class LogBolusBGActivity : AppCompatActivity() {
 
             if(mEvent=="")
             {
-                Toast.makeText(applicationContext,"Please select the event before which you're taking this Insulin",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,resources.getString(R.string.bolusNoEventToastTextLiteral),Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             currentBG=currentBGEditText.text.toString().trim()
             if(TextUtils.isEmpty(currentBG))
             {
-                Toast.makeText(applicationContext,"You haven't entered your current blood glucose level",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,resources.getString(R.string.bolusNoCurrentBGToastTextLiteral),Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -116,7 +126,7 @@ class LogBolusBGActivity : AppCompatActivity() {
             targetBG=targetBGEditText.text.toString().trim()
             if(TextUtils.isEmpty(targetBG))
             {
-                Toast.makeText(applicationContext,"You haven't entered your target blood glucose level",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,resources.getString(R.string.bolusNoTargetBGToastTextLiteral),Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -125,14 +135,14 @@ class LogBolusBGActivity : AppCompatActivity() {
 
             if(currentBGNum<targetBGNum)
             {
-                Toast.makeText(applicationContext,"You don't need to administer Insulin",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,resources.getString(R.string.bolusNoInsulinRequiredToastTextLiteral),Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             mSugar=choEditText.text.toString().trim()
             if(TextUtils.isEmpty(mSugar))
             {
-                Toast.makeText(applicationContext,"You haven't entered the CHO amount in your food",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,resources.getString(R.string.bolusNoTotalCHOToastTextLiteral),Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -141,7 +151,7 @@ class LogBolusBGActivity : AppCompatActivity() {
             choDisposed=choDisposedEditText.text.toString().trim()
             if(TextUtils.isEmpty(choDisposed))
             {
-                Toast.makeText(applicationContext,"You haven't entered the amount of CHO disposed by 1 unit of Insulin",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,resources.getString(R.string.bolusNoCHODisposedToastTextLiteral),Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -150,7 +160,7 @@ class LogBolusBGActivity : AppCompatActivity() {
             correctionFactor=correctionFactorEditText.text.toString().trim()
             if(TextUtils.isEmpty(correctionFactor))
             {
-                Toast.makeText(applicationContext,"You haven't entered the correction factor",Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext,resources.getString(R.string.bolusNoCorrectionFactorToastTextLiteral),Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -185,11 +195,19 @@ class LogBolusBGActivity : AppCompatActivity() {
             bolusBGRootRef.addListenerForSingleValueEvent(object:ValueEventListener{
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
 
+                    isInternetConnected= InternetUtility.isNetworkAvailable(applicationContext)
+
+                    if(!isInternetConnected)
+                    {
+                        Toast.makeText(applicationContext,resources.getString(R.string.internetErrorDB), Toast.LENGTH_SHORT).show()
+                        return
+                    }
+
                     newDataInserted=false
 
                     if(!dataSnapshot.exists())
                     {
-                        val mLogBolusBGLevel=BolusBGLevel(currentEmailID,"Bolus Insulin",mEvent,currentBGNumber,targetBGNumber,choNumber,choDisposedNumber,correctionFactorNumber,totalInsulinRecommendation,calendarTime)
+                        val mLogBolusBGLevel=BolusBGLevel(currentEmailID,resources.getString(R.string.bolusTypeTextLiteral),mEvent,currentBGNumber,targetBGNumber,choNumber,choDisposedNumber,correctionFactorNumber,totalInsulinRecommendation,calendarTime)
                         val key:String=bolusBGRootRef.push().toString()
 
                         val parsedKeyList=key.split("/-")
@@ -198,9 +216,9 @@ class LogBolusBGActivity : AppCompatActivity() {
 
                        bolusBGRootRef.child(parsedKey).setValue(mLogBolusBGLevel)
 
-                        val bolusKeyRootRef=mFirebaseDatabase.getReference("Bolus BG Keys")
+                        val bolusKeyRootRef=mFirebaseDatabase.getReference(resources.getString(R.string.bolusKeysTable))
                         bolusKeyRootRef.push().setValue(parsedKey)
-                        Toast.makeText(applicationContext,"Your data has been uploaded to the cloud",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext,resources.getString(R.string.dataSavedDB),Toast.LENGTH_SHORT).show()
                         newDataInserted=true
                     }
 
@@ -210,18 +228,18 @@ class LogBolusBGActivity : AppCompatActivity() {
                         {
                             if(!newDataInserted)
                             {
-                                val oldBeforeEvent=data.child("beforeEvent").value.toString()
-                                val oldDate=data.child("calendarTime").value.toString()
-                                val oldEmailID=data.child("emailID").value.toString()
+                                val oldBeforeEvent=data.child(resources.getString(R.string.bolusBeforeEventColumn)).value.toString()
+                                val oldDate=data.child(resources.getString(R.string.bolusCalendarTimeColumn)).value.toString()
+                                val oldEmailID=data.child(resources.getString(R.string.bolusEmailColumn)).value.toString()
 
                                 if(oldBeforeEvent == mEvent && oldDate == calendarTime && oldEmailID == currentEmailID)
                                 {
                                     foundKey=data.key.toString()
                                     isKeyFound=true
 
-                                    val mLogBolusBGLevel=BolusBGLevel(currentEmailID,"Bolus Insulin",mEvent,currentBGNumber,targetBGNumber,choNumber,choDisposedNumber,correctionFactorNumber,totalInsulinRecommendation,calendarTime)
+                                    val mLogBolusBGLevel=BolusBGLevel(currentEmailID,resources.getString(R.string.bolusTypeTextLiteral),mEvent,currentBGNumber,targetBGNumber,choNumber,choDisposedNumber,correctionFactorNumber,totalInsulinRecommendation,calendarTime)
                                     bolusBGRootRef.child(foundKey).setValue(mLogBolusBGLevel)
-                                    Toast.makeText(applicationContext, "Your previous data has been updated with the new one", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(applicationContext, resources.getString(R.string.dataOverwrittenDB), Toast.LENGTH_SHORT).show()
                                     newDataInserted=true
 
                                 }
@@ -230,7 +248,7 @@ class LogBolusBGActivity : AppCompatActivity() {
 
                         if(!newDataInserted)
                         {
-                            val mLogBolusBGLevel=BolusBGLevel(currentEmailID,"Bolus Insulin",mEvent,currentBGNumber,targetBGNumber,choNumber,choDisposedNumber,correctionFactorNumber,totalInsulinRecommendation,calendarTime)
+                            val mLogBolusBGLevel=BolusBGLevel(currentEmailID,resources.getString(R.string.bolusTypeTextLiteral),mEvent,currentBGNumber,targetBGNumber,choNumber,choDisposedNumber,correctionFactorNumber,totalInsulinRecommendation,calendarTime)
                             val key:String=bolusBGRootRef.push().toString()
 
                             val parsedKeyList=key.split("/-")
@@ -239,19 +257,27 @@ class LogBolusBGActivity : AppCompatActivity() {
 
                             bolusBGRootRef.child(parsedKey).setValue(mLogBolusBGLevel)
 
-                            val bolusKeyRootRef=mFirebaseDatabase.getReference("Bolus BG Keys")
+                            val bolusKeyRootRef=mFirebaseDatabase.getReference(resources.getString(R.string.bolusKeysTable))
                             bolusKeyRootRef.push().setValue(parsedKey)
-                            Toast.makeText(applicationContext,"Your data has been uploaded to the cloud",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext,resources.getString(R.string.dataSavedDB),Toast.LENGTH_SHORT).show()
                             newDataInserted=true
                         }
                     }
                 }
 
                 override fun onCancelled(error:DatabaseError) {
-                    Toast.makeText(applicationContext,"Error reading from database",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext,resources.getString(R.string.errorReadingDB),Toast.LENGTH_SHORT).show()
                 }
 
             })
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId ==android.R.id.home)
+        {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -5,12 +5,14 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.MenuItem
 import android.widget.Toast
 import com.ciklum.insulinapp.Adapters.adapter1
 import com.ciklum.insulinapp.Adapters.adapter2
 import com.ciklum.insulinapp.Models.BasalBGRecyclerView
 import com.ciklum.insulinapp.Models.BolusBGRecyclerView
 import com.ciklum.insulinapp.R
+import com.ciklum.insulinapp.Utility.InternetUtility
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.*
@@ -78,11 +80,20 @@ class DetailedReportsActivity :AppCompatActivity() {
     private lateinit var trimmedYear:String
     private lateinit var trimmedEvent:String
     private lateinit var compactDBDate:String
+    private var isInternetConnected:Boolean=false
 
     /*------------------------------------------Main code------------------------------------------------*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed_reports)
+
+        if(supportActionBar !=null)
+        {
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayShowHomeEnabled(true)
+            supportActionBar!!.title = resources.getString(R.string.detailedReportsActionBarString)
+        }
+
 
 
         /*-----------------Fetching views and initializing data-------------------*/
@@ -128,6 +139,14 @@ class DetailedReportsActivity :AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 var i=0.0F
 
+                isInternetConnected= InternetUtility.isNetworkAvailable(applicationContext)
+
+                if(isInternetConnected==false)
+                {
+                    Toast.makeText(applicationContext,resources.getString(R.string.internetErrorDB),Toast.LENGTH_SHORT).show()
+                    return
+                }
+
                 for (data: DataSnapshot in dataSnapshot.children) {
                     val emailIDDB = data.child(resources.getString(R.string.bolusEmailColumn)).value.toString().trim()
 
@@ -141,7 +160,7 @@ class DetailedReportsActivity :AppCompatActivity() {
                         val temp2=temp[1]
                         trimmedEvent=temp2[0].toString()
 
-                        compactDBDate=trimmedDate + "-" + trimmedMonth + "-" + trimmedYear + "(" + trimmedEvent + ")"
+                        compactDBDate= "$trimmedDate-$trimmedMonth-$trimmedYear($trimmedEvent)"
 
 
                         bgDB=data.child(resources.getString(R.string.bolusCurrentBGLevelColumn)).value.toString().trim()
@@ -180,7 +199,7 @@ class DetailedReportsActivity :AppCompatActivity() {
                 mBarChart.setDrawValueAboveBar(true)
                 mBarChart.setMaxVisibleValueCount(1000)
                 mBarChart.setVisibleXRangeMaximum(3F)
-                mBarChart.animateXY(3000, 3000)
+                mBarChart.animateXY(2000, 2000)
 
             }
 
@@ -214,6 +233,15 @@ class DetailedReportsActivity :AppCompatActivity() {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 var i=0.0F
+
+                isInternetConnected=InternetUtility.isNetworkAvailable(applicationContext)
+
+                if(isInternetConnected==false)
+                {
+                    Toast.makeText(applicationContext,resources.getString(R.string.internetErrorDB),Toast.LENGTH_SHORT).show()
+                    return
+                }
+
                 val set1= LineDataSet(basalInsulinList,resources.getString(R.string.detailsLineChartLabelTextLiteral))
                 for (data: DataSnapshot in dataSnapshot.children) {
 
@@ -261,7 +289,14 @@ class DetailedReportsActivity :AppCompatActivity() {
                 Toast.makeText(applicationContext,resources.getString(R.string.errorReadingDB),Toast.LENGTH_SHORT).show()
             }
         })
-
-
     }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId ==android.R.id.home)
+        {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }

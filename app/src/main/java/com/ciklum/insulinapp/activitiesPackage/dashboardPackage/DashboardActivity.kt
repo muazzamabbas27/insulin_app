@@ -1,6 +1,5 @@
 package com.ciklum.insulinapp.activitiesPackage.dashboardPackage
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
@@ -13,7 +12,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import com.ciklum.insulinapp.activitiesPackage.Menu.MenuActivity
+import com.ciklum.insulinapp.activitiesPackage.menuPackage.MenuActivity
 import com.ciklum.insulinapp.R
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -25,13 +24,14 @@ import com.ciklum.insulinapp.activitiesPackage.doctorsPackage.DoctorActivity
 import com.ciklum.insulinapp.activitiesPackage.healthArticlesPackage.HealthArticlesActivity
 import com.ciklum.insulinapp.activitiesPackage.logBGPackage.LogBasalBGActivity
 import com.ciklum.insulinapp.activitiesPackage.logBGPackage.LogBolusBGActivity
-import com.ciklum.insulinapp.activitiesPackage.MedicineReminder.ReminderActivity
-import com.ciklum.insulinapp.activitiesPackage.UserProfile.EditUserProfileActivity
-import com.ciklum.insulinapp.activitiesPackage.UserProfile.UserProfileActivity
+import com.ciklum.insulinapp.activitiesPackage.medicineReminderPackage.ReminderActivity
+import com.ciklum.insulinapp.activitiesPackage.userProfilePackage.EditUserProfileActivity
+import com.ciklum.insulinapp.activitiesPackage.userProfilePackage.UserProfileActivity
 import com.ciklum.insulinapp.Adapters.adapter1
 import com.ciklum.insulinapp.Adapters.adapter2
 import com.ciklum.insulinapp.Models.BasalBGRecyclerView
 import com.ciklum.insulinapp.Models.BolusBGRecyclerView
+import com.ciklum.insulinapp.Utility.InternetUtility
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Description
@@ -103,6 +103,8 @@ class DashboardActivity : AppCompatActivity() {
 
     private lateinit var finalString:String
 
+    private var isInternetConnected:Boolean=false
+
     /*------------------------------------------Main code------------------------------------------------*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -127,6 +129,14 @@ class DashboardActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         navigationView= findViewById(R.id.nav_view)
         navigationView.bringToFront()
+        if(mDrawerLayout.isDrawerOpen(navigationView))
+        {
+            mDrawerLayout.closeDrawer(navigationView)
+        }
+        if(supportActionBar!=null)
+        {
+            supportActionBar!!.title = resources.getString(R.string.dashboardActionBarString)
+        }
 
         /*-----------------Fetching Firebase data-------------------*/
 
@@ -147,6 +157,15 @@ class DashboardActivity : AppCompatActivity() {
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                isInternetConnected= InternetUtility.isNetworkAvailable(applicationContext)
+
+                if(!isInternetConnected)
+                {
+                    Toast.makeText(applicationContext,resources.getString(R.string.internetErrorDB),Toast.LENGTH_SHORT).show()
+                    return
+                }
+
                 for (data: DataSnapshot in dataSnapshot.children) {
                     val currentUserID = mFirebaseUser?.uid
 
@@ -168,6 +187,15 @@ class DashboardActivity : AppCompatActivity() {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (data: DataSnapshot in dataSnapshot.children) {
+
+                    isInternetConnected=InternetUtility.isNetworkAvailable(applicationContext)
+
+                    if(!isInternetConnected)
+                    {
+                        Toast.makeText(applicationContext,resources.getString(R.string.internetErrorDB),Toast.LENGTH_SHORT).show()
+                        return
+                    }
+
                     val emailIDDB = data.child(resources.getString(R.string.bolusEmailColumn)).value.toString().trim()
                     if (emailIDDB == currentUserEmailID) {
                         dateDB=data.child(resources.getString(R.string.bolusCalendarTimeColumn)).value.toString().trim()
@@ -297,8 +325,15 @@ class DashboardActivity : AppCompatActivity() {
 
         dashboardBasalRootRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
+
+                isInternetConnected=InternetUtility.isNetworkAvailable(applicationContext)
+
+                if(!isInternetConnected)
+                {
+                    Toast.makeText(applicationContext,resources.getString(R.string.internetErrorDB),Toast.LENGTH_SHORT).show()
+                    return
+                }
+
                 for (data: DataSnapshot in dataSnapshot.children) {
                     val emailIDDB = data.child(resources.getString(R.string.basalEmailColumn)).value.toString().trim()
 

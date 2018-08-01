@@ -12,7 +12,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import android.support.annotation.RequiresApi
-import com.ciklum.insulinapp.activitiesPackage.MedicineReminder.ReminderActivity
+import com.ciklum.insulinapp.activitiesPackage.medicineReminderPackage.ReminderActivity
 import com.ciklum.insulinapp.R
 
 class RingtoneService:Service(){

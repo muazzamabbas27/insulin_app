@@ -1,4 +1,4 @@
-package com.ciklum.insulinapp.activitiesPackage.MedicineReminder
+package com.ciklum.insulinapp.activitiesPackage.medicineReminderPackage
 
 import android.app.Dialog
 import android.support.v7.app.AppCompatActivity
@@ -17,6 +17,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.support.annotation.RequiresApi
+import android.view.MenuItem
 import android.widget.TextView
 import com.ciklum.insulinapp.Models.AlarmReceiver
 import com.google.firebase.auth.FirebaseAuth
@@ -122,6 +123,13 @@ class ReminderActivity : AppCompatActivity() {
         pickTimeBtn = findViewById(R.id.pickTimeBtn)
         timeTextView = findViewById(R.id.timeTextView)
         cancelAlarmBtn = findViewById(R.id.cancelAlarmBtn)
+        if(supportActionBar !=null)
+        {
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayShowHomeEnabled(true)
+            supportActionBar!!.title = resources.getString(R.string.reminderActionBarString)
+        }
+
 
         mAuth = FirebaseAuth.getInstance()
 
@@ -205,5 +213,13 @@ class ReminderActivity : AppCompatActivity() {
 
         val newFragment = TimePickerFragment()
         newFragment.show(supportFragmentManager, "timePicker")
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId ==android.R.id.home)
+        {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

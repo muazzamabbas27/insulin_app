@@ -4,11 +4,13 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.ciklum.insulinapp.Models.Doctor
 import com.ciklum.insulinapp.R
+import com.ciklum.insulinapp.Utility.InternetUtility
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -32,12 +34,21 @@ class AddDoctorActivity : AppCompatActivity() {
     private lateinit var doctorName:String
     private lateinit var doctorPhoneNum:String
 
+    /*-----------------------------------------Local data variables-------------------------------------------------*/
+    private var isInternetConnected:Boolean=false
+
     /*-----------------------------------------Main code-------------------------------------------------*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_doctor)
 
         /*-----------------Fetching views and initializing data-------------------*/
+        if(supportActionBar !=null)
+        {
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayShowHomeEnabled(true)
+            supportActionBar!!.title = resources.getString(R.string.addDoctorActionBarString)
+        }
 
         doctorNameEditText=findViewById(R.id.doctorNameEditText)
         doctorPhoneNumEditText=findViewById(R.id.doctorPhoneNumEditText)
@@ -79,13 +90,29 @@ class AddDoctorActivity : AppCompatActivity() {
             Toast.makeText(applicationContext,resources.getString(R.string.dataSavedDB),Toast.LENGTH_SHORT).show()
             val mDoctor = Doctor(currentUserEmailID,doctorName,doctorPhoneNum)
             val currentUID= mFirebaseUser!!.uid
-            doctorRootRef= doctorRootRef.child(currentUID)
-            doctorRootRef.setValue(mDoctor)
-            val i= Intent(applicationContext,DoctorActivity::class.java)
-            startActivity(i)
-            finish()
+
+            isInternetConnected= InternetUtility.isNetworkAvailable(applicationContext)
+
+            if(!isInternetConnected)
+            {
+                Toast.makeText(applicationContext,resources.getString(R.string.internetErrorDB),Toast.LENGTH_SHORT).show()
+            }
+
+            else{
+                doctorRootRef= doctorRootRef.child(currentUID)
+                doctorRootRef.setValue(mDoctor)
+                val i= Intent(applicationContext,DoctorActivity::class.java)
+                startActivity(i)
+                finish()
+            }
         }
     }
 
-
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId ==android.R.id.home)
+        {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

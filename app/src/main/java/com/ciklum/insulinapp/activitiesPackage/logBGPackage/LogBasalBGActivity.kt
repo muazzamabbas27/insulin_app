@@ -2,11 +2,13 @@ package com.ciklum.insulinapp.activitiesPackage.logBGPackage
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.ciklum.insulinapp.Models.BasalBGLevel
 import com.ciklum.insulinapp.R
+import com.ciklum.insulinapp.Utility.InternetUtility
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -44,6 +46,7 @@ class LogBasalBGActivity : AppCompatActivity() {
     private var foundKey:String=""
     private var isKeyFound:Boolean=false
     private lateinit var finalString: String
+    private var isInternetConnected:Boolean=false
 
     /*------------------------------------------Main code------------------------------------------------*/
 
@@ -52,6 +55,12 @@ class LogBasalBGActivity : AppCompatActivity() {
         setContentView(R.layout.activity_log_basal_bg)
 
         /*-----------------Fetching views and initializing data-------------------*/
+        if(supportActionBar !=null)
+        {
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayShowHomeEnabled(true)
+            supportActionBar!!.title = resources.getString(R.string.basalLoggingActionBarString)
+        }
         weightTextView=findViewById(R.id.weightTextView)
         basalTDITextView=findViewById(R.id.basalTDITextView)
         calculateBasalBGBtn=findViewById(R.id.calculateBasalBGBtn)
@@ -78,6 +87,15 @@ class LogBasalBGActivity : AppCompatActivity() {
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                isInternetConnected= InternetUtility.isNetworkAvailable(applicationContext)
+
+                if(!isInternetConnected)
+                {
+                    Toast.makeText(applicationContext,resources.getString(R.string.internetErrorDB), Toast.LENGTH_SHORT).show()
+                    return
+                }
+
                 for (data: DataSnapshot in dataSnapshot.children) {
                     val currentUserID = mFirebaseUser?.uid
 
@@ -115,6 +133,14 @@ class LogBasalBGActivity : AppCompatActivity() {
 
             basalBGRootRef.addListenerForSingleValueEvent(object:ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    isInternetConnected= InternetUtility.isNetworkAvailable(applicationContext)
+
+                    if(!isInternetConnected)
+                    {
+                        Toast.makeText(applicationContext,resources.getString(R.string.internetErrorDB), Toast.LENGTH_SHORT).show()
+                        return
+                    }
 
                     newDataInserted=false
 
@@ -183,6 +209,12 @@ class LogBasalBGActivity : AppCompatActivity() {
                 }
             })
         }
-
+    }
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId ==android.R.id.home)
+        {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

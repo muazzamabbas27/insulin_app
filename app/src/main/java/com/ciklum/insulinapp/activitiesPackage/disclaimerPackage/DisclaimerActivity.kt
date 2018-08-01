@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import com.ciklum.insulinapp.R
 import android.content.Intent
-
+import android.view.MenuItem
 
 
 class DisclaimerActivity : AppCompatActivity() {
@@ -15,6 +15,14 @@ class DisclaimerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_disclaimer)
+
+        if(supportActionBar !=null)
+        {
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayShowHomeEnabled(true)
+            supportActionBar!!.title = resources.getString(R.string.disclaimerActionBarString)
+        }
+
 
         devEmailBtn=findViewById(R.id.devEmailBtn)
 
@@ -27,5 +35,13 @@ class DisclaimerActivity : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_TEXT, resources.getString(R.string.emailStartingTextLiteral))
             startActivity(Intent.createChooser(intent, ""))
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId ==android.R.id.home)
+        {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

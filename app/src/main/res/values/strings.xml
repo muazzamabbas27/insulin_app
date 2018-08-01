@@ -116,15 +116,51 @@
     <string name="monthNov">Nov</string>
     <string name="monthDec">Dec</string>
 
+    <!--Bundle Strings-->
+    <string name="dateBundleTextLiteral">date</string>
+    <string name="monthBundleTextLiteral">month</string>
+    <string name="yearBundleTextLiteral">year</string>
+
+    <!--Gender strings-->
+    <string name="genderMaleTextLiteral">Male</string>
+    <string name="genderFemaleTextLiteral">Female</string>
 
     <!--Universal Strings-->
     <string name="errorReadingDB">Error reading from database</string>
     <string name="loadingDataDB">Loading data from database</string>
     <string name="dataSavedDB">Data has been stored to database</string>
+    <string name="dataOverwrittenDB">Your previous data has been overwritten with new one</string>
+    <string name="internetErrorDB">Error connecting to database, please check your internet connection</string>
     <string name="previousDataOverwrittenDB">Your previous data has been updated with the new one</string>
     <string name="healthArticlesURL">https://www.icliniq.com/articles/health-topics/diabetes-health</string>
     <string name="basalTypeTextLiteral">Basal Insulin</string>
     <string name="bolusTypeTextLiteral">Bolus Insulin</string>
+    <string name="authenticationSuccessfulTextLiteral">Authentication successful</string>
+    <string name="authenticationFailedTextLiteral">Authentication failed</string>
+
+    <!--Action Bar Strings-->
+    <string name="calendarActionBarString">Calendar</string>
+    <string name="dashboardActionBarString">Dashboard</string>
+    <string name="detailedReportsActionBarString">Detailed Reports</string>
+    <string name="disclaimerActionBarString">Disclaimer</string>
+    <string name="addDoctorActionBarString">Add Doctor</string>
+    <string name="doctorActionBarString">Contact Doctor</string>
+    <string name="healthArticlesActionBarString">iCliniq Health Articles</string>
+    <string name="bolusLoggingActionBarString">Log Bolus Data</string>
+    <string name="basalLoggingActionBarString">Log Basal Data</string>
+    <string name="loginActionBarString">Login</string>
+    <string name="reminderActionBarString">Reminders</string>
+    <string name="menuActionBarString">Insulin App</string>
+    <string name="notesActionBarString">Notes</string>
+    <string name="registerActionBarString">Register</string>
+    <string name="splashActionBarString">Insulin App</string>
+    <string name="profileActionBarString">Profile</string>
+    <string name="editProfileActionBarString">Edit Profile</string>
+
+    <!--Firebase bolus event names-->
+    <string name="bolusBreakfastEvent">Breakfast</string>
+    <string name="bolusLunchEvent">Lunch</string>
+    <string name="bolusDinnerEvent">Dinner</string>
 
     <!--Firebase table names-->
     <string name="bolusBGDataTable">Bolus BG Data</string>
@@ -133,12 +169,16 @@
     <string name="basalKeysTable">Basal BG Keys</string>
     <string name="userTable">User</string>
     <string name="doctorTable">Doctor Data</string>
+    <string name="notesTable">Notes</string>
 
 
     <!--User Firebase column names-->
     <string name="userNameColumn">mname</string>
     <string name="userAgeColumn">mage</string>
-
+    <string name="userGenderColumn">mgender</string>
+    <string name="userWeightColumn">mweight</string>
+    <string name="userHeightColumn">mheight</string>
+    <string name="userEmailIDColumn">emailID</string>
 
     <!--Bolus Firebase column names-->
     <string name="bolusEmailColumn">emailID</string>
@@ -165,6 +205,11 @@
     <string name="doctorNameColumn">mname</string>
     <string name="doctorPhoneColumn">phoneNum</string>
 
+    <!--Notes Firebase column names-->
+    <string name="notesEmailColumn">myEmailID</string>
+    <string name="notesTimeColumn">myTime</string>
+    <string name="notesDetailsColumn">myNotes</string>
+
     <!--Registration page text -->
     <string name="registrationPageTitle">REGISTER</string>
     <string name="emailIDText">Email ID:</string>
@@ -178,6 +223,15 @@
     <string name="weightText">Weight (kg):</string>
     <string name="heightText">Height (cm):</string>
     <string name="confirmBtnText">CONFIRM</string>
+    <string name="registerNoEmailIDToastTextLiteral">You haven\'t entered your email ID</string>
+    <string name="registerNoPasswordToastTextLiteral">You haven\'t entered your password</string>
+    <string name="registerNoAgainPasswordToastTextLiteral">You haven\'t re-entered your password</string>
+    <string name="registerNoPasswordMatchToastTextLiteral">Your passwords don\'t match</string>
+    <string name="registerNoNameToastTextLiteral">You haven\'t entered your name</string>
+    <string name="registerNoGenderToastTextLiteral">You haven\'t selected your gender</string>
+    <string name="registerNoWeightToastTextLiteral">You haven\'t entered your weight</string>
+    <string name="registerNoHeightToastTextLiteral">You haven\'t entered your height</string>
+    <string name="registerIncorrectEmailFormat">Your email ID is not in the correct format</string>
 
 
     <!--Login page text -->
@@ -185,6 +239,8 @@
     <string name="loginBtnText">SIGN IN</string>
     <string name="loginEmailIDHint">john.doe@example.com</string>
     <string name="loginPasswordHint">12345678</string>
+    <string name="loginNoEmailToastTextLiteral">Please enter your email ID</string>
+    <string name="loginNoPasswordToastTextLiteral">Please enter your password</string>
 
     <!--Dashboard page text-->
     <string name="dashboardPageTitle">DASHBOARD</string>
@@ -244,6 +300,13 @@
     <string name="doneBGBtnText">Done</string>
     <string name="bolusRecommendationPreTextLiteral">You should take</string>
     <string name="bolusRecommendationEndTextLiteral">units of Insulin</string>
+    <string name="bolusNoEventToastTextLiteral">Please select the event before which you\'re taking this Insulin</string>
+    <string name="bolusNoCurrentBGToastTextLiteral">You haven\'t entered your current blood glucose level</string>
+    <string name="bolusNoTargetBGToastTextLiteral">You haven\'t entered your target blood glucose level</string>
+    <string name="bolusNoInsulinRequiredToastTextLiteral">You don\'t need to administer Insulin</string>
+    <string name="bolusNoTotalCHOToastTextLiteral">You haven\'t entered the CHO amount in your food</string>
+    <string name="bolusNoCHODisposedToastTextLiteral">You haven\'t entered the amount of CHO disposed by 1 unit of Insulin</string>
+    <string name="bolusNoCorrectionFactorToastTextLiteral">You haven\'t entered the correction factor</string>
 
     <!--Log Basal BG Level page text-->
     <string name="logBasalBGTitle">Log Basal Blood Glucose</string>
@@ -307,6 +370,10 @@
     <string name="editProfileAge">Age:</string>
     <string name="editProfileGender">Gender:</string>
     <string name="saveEditsBtnText">Save edits</string>
+    <string name="editProfileNoNameToastTextLiteral">Please enter your name</string>
+    <string name="editProfileNoGenderToastTextLiteral">Please select your gender</string>
+    <string name="editProfileNoWeightToastTextLiteral">You haven\'t entered your weight</string>
+    <string name="editProfileNoHeightToastTextLiteral">You haven\'t entered your height</string>
 
     <!--Medicine reminder page text-->
     <string name="medicineReminderTitle">Medicine Reminder</string>
@@ -351,7 +418,7 @@
                                 \n
                                 1-Jan-2018 (L) = 1-January-2018 (Before Lunch)
                                 \n
-                                1-Jan-2018 (D) = 1-January-2019 (Before Dinner)</string>
+                                1-Jan-2018 (D) = 1-January-2018 (Before Dinner)</string>
 
 
     <!--BG Level Basal RecyclerView text-->

@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
@@ -14,21 +15,21 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activitiesPackage.SplashScreen.SplashActivity">
+        <activity android:name=".activitiesPackage.splashScreenPackage.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activitiesPackage.Menu.MenuActivity" />
+        <activity android:name=".activitiesPackage.menuPackage.MenuActivity" />
         <activity
-            android:name=".activitiesPackage.Register.RegisterActivity"
+            android:name=".activitiesPackage.registerPackage.RegisterActivity"
             android:windowSoftInputMode="stateHidden" /> <!-- Hide software keyboard, cursor will still be visible -->
-        <activity android:name=".activitiesPackage.Login.LoginActivity" />
+        <activity android:name=".activitiesPackage.loginPackage.LoginActivity" />
         <activity android:name=".activitiesPackage.dashboardPackage.DashboardActivity" />
         <activity android:name=".activitiesPackage.calendarPackage.MyCalendar" />
-        <activity android:name=".activitiesPackage.Notes.NotesActivity" />
+        <activity android:name=".activitiesPackage.notesPackage.NotesActivity" />
         <activity
             android:name=".activitiesPackage.logBGPackage.LogBolusBGActivity"
             android:windowSoftInputMode="stateHidden" /> <!-- Hide software keyboard, cursor will still be visible -->
@@ -37,9 +38,9 @@
         <activity android:name=".activitiesPackage.doctorsPackage.DoctorActivity" />
         <activity android:name=".activitiesPackage.disclaimerPackage.DisclaimerActivity" />
         <activity android:name=".activitiesPackage.doctorsPackage.AddDoctorActivity" />
-        <activity android:name=".activitiesPackage.UserProfile.UserProfileActivity" />
-        <activity android:name=".activitiesPackage.UserProfile.EditUserProfileActivity" />
-        <activity android:name=".activitiesPackage.MedicineReminder.ReminderActivity" />
+        <activity android:name=".activitiesPackage.userProfilePackage.UserProfileActivity" />
+        <activity android:name=".activitiesPackage.userProfilePackage.EditUserProfileActivity" />
+        <activity android:name=".activitiesPackage.medicineReminderPackage.ReminderActivity" />
 
         <receiver android:name=".Models.AlarmReceiver" />
 

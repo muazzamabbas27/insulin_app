@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.Toast
-import com.ciklum.insulinapp.activitiesPackage.Notes.NotesActivity
+import com.ciklum.insulinapp.activitiesPackage.notesPackage.NotesActivity
 import com.ciklum.insulinapp.Models.BolusBGRecyclerView
 import com.ciklum.insulinapp.R
 import com.google.firebase.auth.FirebaseAuth
@@ -22,6 +22,8 @@ import com.ciklum.insulinapp.Adapters.adapter1
 import com.ciklum.insulinapp.Adapters.adapter2
 import com.ciklum.insulinapp.Models.BasalBGRecyclerView
 import kotlin.collections.ArrayList
+import android.view.MenuItem
+import com.ciklum.insulinapp.Utility.InternetUtility
 
 
 class MyCalendar : AppCompatActivity() {
@@ -81,6 +83,8 @@ class MyCalendar : AppCompatActivity() {
 
     private lateinit var currentCompleteDate:String
 
+    private var isInternetConnected:Boolean=false
+
 
     /*------------------------------------------Main code------------------------------------------------*/
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,6 +93,14 @@ class MyCalendar : AppCompatActivity() {
 
 
         /*-----------------Fetching views and initializing data-------------------*/
+
+        if(supportActionBar !=null)
+        {
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayShowHomeEnabled(true)
+            supportActionBar!!.title = resources.getString(R.string.calendarActionBarString)
+        }
+
 
         mCalendarView=findViewById(R.id.calendarView)
         makeNotesBtn=findViewById(R.id.makeNotesBtn)
@@ -131,6 +143,15 @@ class MyCalendar : AppCompatActivity() {
 
         calendarBolusRootRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                isInternetConnected=InternetUtility.isNetworkAvailable(applicationContext)
+
+                if(!isInternetConnected)
+                {
+                    Toast.makeText(applicationContext,resources.getString(R.string.internetErrorDB),Toast.LENGTH_SHORT).show()
+                    return
+                }
+
                 for (data: DataSnapshot in dataSnapshot.children)
                 {
                     val emailIDDB=data.child(resources.getString(R.string.bolusEmailColumn)).value.toString().trim()
@@ -175,6 +196,15 @@ class MyCalendar : AppCompatActivity() {
 
         calendarBasalRootRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                isInternetConnected=InternetUtility.isNetworkAvailable(applicationContext)
+
+                if(!isInternetConnected)
+                {
+                    Toast.makeText(applicationContext,resources.getString(R.string.internetErrorDB),Toast.LENGTH_SHORT).show()
+                    return
+                }
+
                 for (data: DataSnapshot in dataSnapshot.children)
                 {
                     val emailIDDB=data.child(resources.getString(R.string.basalEmailColumn)).value.toString().trim()
@@ -251,8 +281,18 @@ class MyCalendar : AppCompatActivity() {
 
             /*-----------------Load Bolus data on date change-------------------*/
 
+
             calendarBolusRootRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    isInternetConnected=InternetUtility.isNetworkAvailable(applicationContext)
+
+                    if(!isInternetConnected)
+                    {
+                        Toast.makeText(applicationContext,resources.getString(R.string.internetErrorDB),Toast.LENGTH_SHORT).show()
+                        return
+                    }
+
                     for (data: DataSnapshot in dataSnapshot.children)
                     {
                         val emailIDDB=data.child(resources.getString(R.string.bolusEmailColumn)).value.toString().trim()
@@ -295,8 +335,18 @@ class MyCalendar : AppCompatActivity() {
 
             /*-----------------Load Basal data on date change-------------------*/
 
+
             calendarBasalRootRef.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    isInternetConnected=InternetUtility.isNetworkAvailable(applicationContext)
+
+                    if(!isInternetConnected)
+                    {
+                        Toast.makeText(applicationContext,resources.getString(R.string.internetErrorDB),Toast.LENGTH_SHORT).show()
+                        return
+                    }
+
                     for (data: DataSnapshot in dataSnapshot.children)
                     {
                         val emailIDDB=data.child(resources.getString(R.string.basalEmailColumn)).value.toString().trim()
@@ -341,8 +391,6 @@ class MyCalendar : AppCompatActivity() {
         makeNotesBtn.setOnClickListener()
         {
 
-            //if user has not changed date, find current date and pass to Notes activity
-
             if(!isDateChanged)
             {
                 val date = Calendar.getInstance().time
@@ -357,9 +405,9 @@ class MyCalendar : AppCompatActivity() {
                 tempYear=sdf3.format(date)
 
                 val i=Intent(this,NotesActivity::class.java)
-                i.putExtra("date",tempDate)
-                i.putExtra("month",tempMonth)
-                i.putExtra("year",tempYear)
+                i.putExtra(resources.getString(R.string.dateBundleTextLiteral),tempDate)
+                i.putExtra(resources.getString(R.string.monthBundleTextLiteral),tempMonth)
+                i.putExtra(resources.getString(R.string.yearBundleTextLiteral),tempYear)
                 startActivity(i)
             }
 
@@ -369,9 +417,9 @@ class MyCalendar : AppCompatActivity() {
             else
             {
                 val i=Intent(this,NotesActivity::class.java)
-                i.putExtra("date",myDate)
-                i.putExtra("month",myMonth)
-                i.putExtra("year",myYear)
+                i.putExtra(resources.getString(R.string.dateBundleTextLiteral),myDate)
+                i.putExtra(resources.getString(R.string.monthBundleTextLiteral),myMonth)
+                i.putExtra(resources.getString(R.string.yearBundleTextLiteral),myYear)
                 startActivity(i)
             }
         }
@@ -406,5 +454,13 @@ class MyCalendar : AppCompatActivity() {
             11 -> monthString=resources.getString(R.string.monthNov)
             12 -> monthString=resources.getString(R.string.monthDec)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId ==android.R.id.home)
+        {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

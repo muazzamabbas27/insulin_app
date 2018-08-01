@@ -14,6 +14,8 @@ import com.google.firebase.database.*
 import android.support.v4.app.ActivityCompat
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.view.MenuItem
+import com.ciklum.insulinapp.Utility.InternetUtility
 
 
 class DoctorActivity : AppCompatActivity() {
@@ -37,6 +39,7 @@ class DoctorActivity : AppCompatActivity() {
     /*-----------------------------------------Local data variables-------------------------------------------------*/
     private var doctorDataFound:Boolean=false
     private val requestPhoneCall = 1
+    private var isInternetConnected:Boolean=false
 
 
     /*-----------------------------------------Main code-------------------------------------------------*/
@@ -45,6 +48,12 @@ class DoctorActivity : AppCompatActivity() {
         setContentView(R.layout.activity_doctor)
 
         /*-----------------Fetching views and initializing data-------------------*/
+        if(supportActionBar !=null)
+        {
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayShowHomeEnabled(true)
+            supportActionBar!!.title = resources.getString(R.string.doctorActionBarString)
+        }
 
         doctorNameTextView=findViewById(R.id.doctorNameTextView)
         doctorPhoneNumBtn=findViewById(R.id.doctorPhoneNumBtn)
@@ -65,6 +74,15 @@ class DoctorActivity : AppCompatActivity() {
 
         doctorRootRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                isInternetConnected= InternetUtility.isNetworkAvailable(applicationContext)
+
+                if(!isInternetConnected)
+                {
+                    Toast.makeText(applicationContext,resources.getString(R.string.internetErrorDB),Toast.LENGTH_SHORT).show()
+                    return
+                }
+
                 for (data:DataSnapshot in dataSnapshot.children)
                 {
                     val currentUserID=mFirebaseUser?.uid
@@ -146,5 +164,13 @@ class DoctorActivity : AppCompatActivity() {
                 return
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId ==android.R.id.home)
+        {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
